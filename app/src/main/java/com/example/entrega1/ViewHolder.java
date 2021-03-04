@@ -1,5 +1,6 @@
 package com.example.entrega1;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.text.LineBreaker;
 import android.os.Build;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
 
+    public String id;
     public ImageView portada;
     public TextView titulo;
     public TextView generos;
@@ -37,6 +39,10 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent (view.getContext(), PeliculaActivity.class);
+                i.putExtra("id", id);
+                view.getContext().startActivity(i);
+
                 /*
                 if (seleccion[getAdapterPosition()] == true){
                     seleccion[getAdapterPosition()] = false;

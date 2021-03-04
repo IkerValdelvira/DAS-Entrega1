@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.HashMap;
 
-public class CatalogoActivity extends AppCompatActivity implements ComunicacionApi.ListenerApi{
+public class CatalogoActivity extends AppCompatActivity implements ComunicacionApi.ListenerApi {
 
     EditText editTextBuscador;
     RecyclerView recyclerView;
     AdaptadorRecycler adaptador;
     LinearLayoutManager linearLayout;
+
+    ComunicacionApi comApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
         linearLayout = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(linearLayout);
 
+        comApi = new ComunicacionApi(this);
+
     }
 
     public void onClickBuscar(View v) {
@@ -41,13 +45,13 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
             aviso.show();
         }
         else{
-            ComunicacionApi comApi = new ComunicacionApi(this);
             comApi.getMovieList(tituloBuscado);
         }
     }
 
     @Override
     public void alRecogerListaPeliculas(HashMap<String,String[]> movieList) {
+        String[] ids = movieList.get("ids");
         String[] portadasURL = movieList.get("portadasURL");
         String[] titulos = movieList.get("titulos");
         String[] generos = movieList.get("generos");
@@ -56,7 +60,13 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
         String[] idiomas = movieList.get("idiomas");
         String[] sinopsis = movieList.get("sinopsis");
 
-        adaptador = new AdaptadorRecycler(portadasURL,titulos,generos,fechas,puntuaciones,idiomas,sinopsis);
+        adaptador = new AdaptadorRecycler(ids,portadasURL,titulos,generos,fechas,puntuaciones,idiomas,sinopsis);
         recyclerView.setAdapter(adaptador);
     }
+
+    @Override
+    public void alRecogerInfoPelicula(HashMap<String, String> pListaPeliculas) {
+
+    }
+
 }
