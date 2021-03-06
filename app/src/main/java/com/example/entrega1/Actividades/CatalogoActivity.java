@@ -1,4 +1,4 @@
-package com.example.entrega1;
+package com.example.entrega1.Actividades;
 
 import android.os.Bundle;
 import android.view.Gravity;
@@ -9,6 +9,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.entrega1.Adaptadores.AdaptadorRecycler;
+import com.example.entrega1.ComunicacionApi;
+import com.example.entrega1.R;
 
 import java.util.HashMap;
 

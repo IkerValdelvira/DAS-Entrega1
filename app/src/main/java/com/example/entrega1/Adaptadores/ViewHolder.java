@@ -1,7 +1,6 @@
-package com.example.entrega1;
+package com.example.entrega1.Adaptadores;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.text.LineBreaker;
 import android.os.Build;
 import android.view.View;
@@ -10,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.entrega1.Actividades.PeliculaActivity;
+import com.example.entrega1.R;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -42,17 +44,6 @@ public class ViewHolder extends RecyclerView.ViewHolder {
                 Intent i = new Intent (view.getContext(), PeliculaActivity.class);
                 i.putExtra("id", id);
                 view.getContext().startActivity(i);
-
-                /*
-                if (seleccion[getAdapterPosition()] == true){
-                    seleccion[getAdapterPosition()] = false;
-                    imagen.setColorFilter(Color.WHITE);
-                }
-                else{
-                    seleccion[getAdapterPosition()] = true;
-                    imagen.setColorFilter(Color.BLUE);
-                }
-                */
             }
         });
     }

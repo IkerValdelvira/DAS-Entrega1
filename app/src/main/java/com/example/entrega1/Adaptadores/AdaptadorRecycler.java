@@ -1,4 +1,4 @@
-package com.example.entrega1;
+package com.example.entrega1.Adaptadores;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.entrega1.R;
 import com.squareup.picasso.Picasso;
 
 public class AdaptadorRecycler extends RecyclerView.Adapter<ViewHolder> {

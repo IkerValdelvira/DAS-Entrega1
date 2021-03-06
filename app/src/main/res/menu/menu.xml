@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/opcion1"
+        android:icon="@drawable/star"
+        android:title="Favoritos"
+        app:showAsAction="ifRoom|withText" />
+
+    <item
+        android:id="@+id/opcion2"
+        android:icon="@drawable/watchlater"
+        android:title="Ver más tarde"
+        app:showAsAction="ifRoom|withText" />
+
+    <item
+        android:id="@+id/opcion3"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="Preferencias"
+        app:showAsAction="never" />
+
+</menu>

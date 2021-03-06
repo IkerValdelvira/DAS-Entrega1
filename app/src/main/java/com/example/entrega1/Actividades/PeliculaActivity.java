@@ -1,6 +1,7 @@
-package com.example.entrega1;
+package com.example.entrega1.Actividades;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.graphics.text.LineBreaker;
 import android.os.Build;
@@ -9,30 +10,36 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.entrega1.ComunicacionApi;
+import com.example.entrega1.Dialogos.DialogoAñadirFavoritos;
+import com.example.entrega1.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
 public class PeliculaActivity extends AppCompatActivity implements ComunicacionApi.ListenerApi {
 
-    TextView titulo;
-    ImageView portada;
-    TextView adulto;
-    TextView puntuacion;
-    TextView generos;
-    TextView duracion;
-    TextView fecha;
-    TextView idiomaOrig;
-    TextView idiomaDisp;
-    TextView presupuesto;
-    TextView ingresos;
-    TextView productoras;
-    TextView sinopsis;
+    private String id;
+    private String portadaURL;
 
-    ImageView favoritos;
-    ImageView verMasTarde;
+    private TextView titulo;
+    private ImageView portada;
+    private TextView adulto;
+    private TextView puntuacion;
+    private TextView generos;
+    private TextView duracion;
+    private TextView fecha;
+    private TextView idiomaOrig;
+    private TextView idiomaDisp;
+    private TextView presupuesto;
+    private TextView ingresos;
+    private TextView productoras;
+    private TextView sinopsis;
 
-    ComunicacionApi comApi;
+    private ImageView favoritos;
+    private ImageView verMasTarde;
+
+    private ComunicacionApi comApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,33 +80,37 @@ public class PeliculaActivity extends AppCompatActivity implements ComunicacionA
     }
 
     @Override
-    public void alRecogerInfoPelicula(HashMap<String, String> pListaPeliculas) {
-        titulo.setText(pListaPeliculas.get("titulo"));
-        Picasso.get().load(pListaPeliculas.get("portadaURL")).into(portada);
-        if("false".equals(pListaPeliculas.get("adulto"))){
+    public void alRecogerInfoPelicula(HashMap<String, String> pInfoPelicula) {
+        id = pInfoPelicula.get("id");
+        titulo.setText(pInfoPelicula.get("titulo"));
+        portadaURL = pInfoPelicula.get("portadaURL");
+        Picasso.get().load(portadaURL).into(portada);
+        if("false".equals(pInfoPelicula.get("adulto"))){
             adulto.setVisibility(View.INVISIBLE);
         }
-        puntuacion.setText(pListaPeliculas.get("puntuacion"));
-        puntuacion.setText(pListaPeliculas.get("puntuacion"));
-        generos.setText(pListaPeliculas.get("generos"));
-        duracion.setText(pListaPeliculas.get("duracion"));
-        fecha.setText(pListaPeliculas.get("fecha"));
-        idiomaOrig.setText(pListaPeliculas.get("idiomaOrig"));
-        idiomaDisp.setText(pListaPeliculas.get("idiomaDisp"));
-        presupuesto.setText(pListaPeliculas.get("presupuesto"));
-        ingresos.setText(pListaPeliculas.get("ingresos"));
-        productoras.setText(pListaPeliculas.get("productoras"));
-        sinopsis.setText(pListaPeliculas.get("sinopsis"));
+        puntuacion.setText(pInfoPelicula.get("puntuacion"));
+        puntuacion.setText(pInfoPelicula.get("puntuacion"));
+        generos.setText(pInfoPelicula.get("generos"));
+        duracion.setText(pInfoPelicula.get("duracion"));
+        fecha.setText(pInfoPelicula.get("fecha"));
+        idiomaOrig.setText(pInfoPelicula.get("idiomaOrig"));
+        idiomaDisp.setText(pInfoPelicula.get("idiomaDisp"));
+        presupuesto.setText(pInfoPelicula.get("presupuesto"));
+        ingresos.setText(pInfoPelicula.get("ingresos"));
+        productoras.setText(pInfoPelicula.get("productoras"));
+        sinopsis.setText(pInfoPelicula.get("sinopsis"));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             sinopsis.setJustificationMode(LineBreaker.JUSTIFICATION_MODE_INTER_WORD);
         }
     }
 
     public void onClickFavoritos(View v) {
-
+        DialogFragment dialogoAñadirFavoritos = new DialogoAñadirFavoritos(id, titulo.getText().toString(), portadaURL);
+        dialogoAñadirFavoritos.show(getSupportFragmentManager(), "añadir_favoritos");
     }
 
     public void onClickVerMasTarde(View v) {
 
     }
+
 }

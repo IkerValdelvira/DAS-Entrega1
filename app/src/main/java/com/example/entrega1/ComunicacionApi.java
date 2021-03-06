@@ -183,6 +183,8 @@ public class ComunicacionApi {
                         try {
                             HashMap<String,String> resultado = new HashMap<>();
 
+                            resultado.put("id", pIdPelicula);
+
                             String titulo = response.getString("title");
                             resultado.put("titulo", titulo);
 
