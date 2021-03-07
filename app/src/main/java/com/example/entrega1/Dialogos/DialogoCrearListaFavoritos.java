@@ -19,6 +19,7 @@ import com.example.entrega1.R;
 
 public class DialogoCrearListaFavoritos extends DialogFragment {
 
+    private String usuario;
     private String idPelicula;
     private String tituloPelicula;
     private String portadaPelicula;
@@ -26,7 +27,8 @@ public class DialogoCrearListaFavoritos extends DialogFragment {
     private GestorDB gestorDB;
 
 
-    public DialogoCrearListaFavoritos(String pId, String pTitulo, String pPortada) {
+    public DialogoCrearListaFavoritos(String pUsuario, String pId, String pTitulo, String pPortada) {
+        usuario = pUsuario;
         idPelicula = pId;
         tituloPelicula = pTitulo;
         portadaPelicula = pPortada;
@@ -50,7 +52,7 @@ public class DialogoCrearListaFavoritos extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String nombre = editTextNombre.getText().toString();
-                gestorDB.insertarPeliculaFavoritos(nombre, idPelicula, tituloPelicula, portadaPelicula);
+                gestorDB.insertarPeliculaFavoritos(usuario, nombre, idPelicula, tituloPelicula, portadaPelicula);
                 Toast aviso = Toast.makeText(getActivity(), "Lista '" + nombre + "' creada correctamente.", Toast.LENGTH_SHORT);
                 aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
                 aviso.show();

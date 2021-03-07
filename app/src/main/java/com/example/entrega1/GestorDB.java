@@ -22,8 +22,8 @@ public class GestorDB extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE Usuarios ('Usuario' VARCHAR(255) NOT NULL PRIMARY KEY, 'Contrasena' VARCHAR(255))");
-        db.execSQL("CREATE TABLE ListasFavoritos ('Nombre' VARCHAR(255) NOT NULL, 'IdPelicula' INTEGER NOT NULL, 'Titulo' VARCHAR(255), 'Portada' VARCHAR(500), PRIMARY KEY(Nombre,IdPelicula))");
-        db.execSQL("CREATE TABLE VerMasTarde ('IdPelicula' INTEGER NOT NULL, 'Fecha' VARCHAR(255) NOT NULL, 'Titulo' VARCHAR(255), 'Portada' VARCHAR(500), PRIMARY KEY(IdPelicula,Fecha))");
+        db.execSQL("CREATE TABLE ListasFavoritos ('Usuario' VARCHAR(255), 'Nombre' VARCHAR(255) NOT NULL, 'IdPelicula' INTEGER NOT NULL, 'Titulo' VARCHAR(255), 'Portada' VARCHAR(500), PRIMARY KEY(Nombre,IdPelicula))");
+        db.execSQL("CREATE TABLE VerMasTarde ('Usuario' VARCHAR(255), 'IdPelicula' INTEGER NOT NULL, 'Fecha' VARCHAR(255) NOT NULL, 'Titulo' VARCHAR(255), 'Portada' VARCHAR(500), PRIMARY KEY(IdPelicula,Fecha))");
     }
 
     @Override
@@ -31,9 +31,9 @@ public class GestorDB extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<String> getListasFavoritos() {
+    public ArrayList<String> getListasFavoritos(String username) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT DISTINCT Nombre FROM ListasFavoritos",null);
+        Cursor c = db.rawQuery("SELECT DISTINCT Nombre FROM ListasFavoritos WHERE Usuario = '" + username + "'",null);
         ArrayList<String> nombres = new ArrayList<>();
         while (c.moveToNext()){
             nombres.add(c.getString(0));
@@ -43,9 +43,9 @@ public class GestorDB extends SQLiteOpenHelper {
         return nombres;
     }
 
-    public String[] getListasFavoritos(String idPelicula) {
+    public String[] getListasFavoritos(String username, String idPelicula) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT Nombre FROM ListasFavoritos EXCEPT SELECT Nombre FROM ListasFavoritos WHERE idPelicula = '" + idPelicula + "'",null);
+        Cursor c = db.rawQuery("SELECT Nombre FROM ListasFavoritos WHERE Usuario = '" + username + "' EXCEPT SELECT Nombre FROM ListasFavoritos WHERE Usuario = '" + username + "' AND IdPelicula = " + Integer.parseInt(idPelicula),null);
         String[] nombres = new String[c.getCount()];
         int i = 0;
         while (c.moveToNext()){
@@ -57,19 +57,19 @@ public class GestorDB extends SQLiteOpenHelper {
         return nombres;
     }
 
-    public void insertarPeliculaFavoritos(String lista, String id, String titulo, String portada) {
+    public void insertarPeliculaFavoritos(String username, String lista, String id, String titulo, String portada) {
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM ListasFavoritos WHERE Nombre = '" + lista + "' AND IdPelicula = " + Integer.parseInt(id),null);
+        Cursor c = db.rawQuery("SELECT * FROM ListasFavoritos WHERE Usuario = '" + username + "' AND Nombre = '" + lista + "' AND IdPelicula = " + Integer.parseInt(id),null);
         if(c.getCount() == 0) {
-            db.execSQL("INSERT INTO ListasFavoritos VALUES ('" + lista + "', " + Integer.parseInt(id) + ", '" + titulo + "', '" + portada + "')");
+            db.execSQL("INSERT INTO ListasFavoritos VALUES ('" + username + "', '" + lista + "', " + Integer.parseInt(id) + ", '" + titulo + "', '" + portada + "')");
         }
         c.close();
         db.close();
     }
 
-    public Pelicula[] getPeliculasListaFav(String lista) {
+    public Pelicula[] getPeliculasListaFav(String username, String lista) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT IdPelicula, Titulo, Portada FROM ListasFavoritos WHERE Nombre = '" + lista + "'",null);
+        Cursor c = db.rawQuery("SELECT IdPelicula, Titulo, Portada FROM ListasFavoritos WHERE Usuario = '" + username + "' AND Nombre = '" + lista + "'",null);
         Pelicula[] peliculas = new Pelicula[c.getCount()];
         int i = 0;
         while (c.moveToNext()){
@@ -82,25 +82,25 @@ public class GestorDB extends SQLiteOpenHelper {
         return peliculas;
     }
 
-    public void eliminarPeliculaLista(String lista, String idPelicula) {
+    public void eliminarPeliculaLista(String username, String lista, String idPelicula) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM ListasFavoritos WHERE Nombre = '" + lista + "' AND IdPelicula = " + Integer.parseInt(idPelicula));
+        db.execSQL("DELETE FROM ListasFavoritos WHERE Usuario = '" + username + "' AND Nombre = '" + lista + "' AND IdPelicula = " + Integer.parseInt(idPelicula));
         db.close();
     }
 
-    public void insertarPeliculaVerMasTarde(String id, String fecha, String titulo, String portada) {
+    public void insertarPeliculaVerMasTarde(String username, String id, String fecha, String titulo, String portada) {
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM VerMasTarde WHERE IdPelicula = " + Integer.parseInt(id) + " AND Fecha = '" + fecha + "'",null);
+        Cursor c = db.rawQuery("SELECT * FROM VerMasTarde WHERE Usuario = '" + username + "' AND IdPelicula = " + Integer.parseInt(id) + " AND Fecha = '" + fecha + "'",null);
         if(c.getCount() == 0) {
-            db.execSQL("INSERT INTO VerMasTarde VALUES (" + Integer.parseInt(id) + ", '" + fecha + "', '" + titulo + "', '" + portada + "')");
+            db.execSQL("INSERT INTO VerMasTarde VALUES ('" + username + "', " + Integer.parseInt(id) + ", '" + fecha + "', '" + titulo + "', '" + portada + "')");
         }
         c.close();
         db.close();
     }
 
-    public Pelicula[] getPeliculasVMT() {
+    public Pelicula[] getPeliculasVMT(String username) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT IdPelicula, Fecha, Titulo, Portada FROM VerMasTarde",null);
+        Cursor c = db.rawQuery("SELECT IdPelicula, Fecha, Titulo, Portada FROM VerMasTarde WHERE Usuario = '" + username + "'",null);
         Pelicula[] peliculas = new Pelicula[c.getCount()];
         int i = 0;
         while (c.moveToNext()){
@@ -113,9 +113,9 @@ public class GestorDB extends SQLiteOpenHelper {
         return peliculas;
     }
 
-    public void eliminarPeliculaVMT(String idPelicula, String fechaPelicula) {
+    public void eliminarPeliculaVMT(String username, String idPelicula, String fechaPelicula) {
         SQLiteDatabase db = getWritableDatabase();
-        System.out.println("DELETE FROM VerMasTarde WHERE IdPelicula = " + Integer.parseInt(idPelicula) + " AND Fecha = '" + fechaPelicula + "'");
+        System.out.println("DELETE FROM VerMasTarde WHERE Usuario = '" + username + "' AND IdPelicula = " + Integer.parseInt(idPelicula) + " AND Fecha = '" + fechaPelicula + "'");
         db.execSQL("DELETE FROM VerMasTarde WHERE IdPelicula = " + Integer.parseInt(idPelicula) + " AND Fecha = '" + fechaPelicula + "'");
         db.close();
     }

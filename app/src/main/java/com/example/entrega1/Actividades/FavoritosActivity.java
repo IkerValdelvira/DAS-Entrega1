@@ -33,6 +33,8 @@ public class FavoritosActivity extends AppCompatActivity implements DialogoQuita
 
     private GestorDB gestorDB;
 
+    private String usuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +43,13 @@ public class FavoritosActivity extends AppCompatActivity implements DialogoQuita
         spinner = findViewById(R.id.spinnerFavoritos);
         listView = findViewById(R.id.listViewFav);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            usuario = extras.getString("usuario");
+        }
+
         gestorDB = new GestorDB (this, "DB", null, 1);
-        ArrayList<String> listas = gestorDB.getListasFavoritos();
+        ArrayList<String> listas = gestorDB.getListasFavoritos(usuario);
         adaptadorSpinner = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listas);
         adaptadorSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adaptadorSpinner);
@@ -52,7 +59,7 @@ public class FavoritosActivity extends AppCompatActivity implements DialogoQuita
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String listaSeleccionada = listas.get(position);
                 posSeleccionada = position;
-                Pelicula[] peliculas = gestorDB.getPeliculasListaFav(listaSeleccionada);
+                Pelicula[] peliculas = gestorDB.getPeliculasListaFav(usuario, listaSeleccionada);
                 ids = new String[peliculas.length];
                 portadas = new String[peliculas.length];
                 titulos = new String[peliculas.length];
@@ -61,7 +68,7 @@ public class FavoritosActivity extends AppCompatActivity implements DialogoQuita
                     portadas[i] = peliculas[i].getPortadaURL();
                     titulos[i] = peliculas[i].getTitulo();
                 }
-                adaptadorListView = new AdaptadorListViewFavoritos(FavoritosActivity.this,listaSeleccionada,ids,portadas,titulos);
+                adaptadorListView = new AdaptadorListViewFavoritos(usuario, FavoritosActivity.this,listaSeleccionada,ids,portadas,titulos);
                 listView.setAdapter(adaptadorListView);
 
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -85,7 +92,7 @@ public class FavoritosActivity extends AppCompatActivity implements DialogoQuita
 
     @Override
     public void alBorrarPelicula() {
-        ArrayList<String> listas = gestorDB.getListasFavoritos();
+        ArrayList<String> listas = gestorDB.getListasFavoritos(usuario);
         adaptadorSpinner = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listas);
         adaptadorSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adaptadorSpinner);

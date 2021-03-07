@@ -24,9 +24,11 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     public TextView idioma;
     public TextView sinopsis;
     public boolean[] seleccion;
+    private String usuario;
 
-    public ViewHolder(@NonNull View itemView){
+    public ViewHolder(String pUsuario, @NonNull View itemView){
         super(itemView);
+        usuario = pUsuario;
         portada = itemView.findViewById(R.id.imageViewPortada);
         titulo = itemView.findViewById(R.id.textViewTitulo);
         generos = itemView.findViewById(R.id.textViewGeneros);
@@ -43,6 +45,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View view) {
                 Intent i = new Intent (view.getContext(), PeliculaActivity.class);
                 i.putExtra("id", id);
+                i.putExtra("usuario", usuario);
                 view.getContext().startActivity(i);
             }
         });

@@ -53,6 +53,8 @@ public class PeliculaActivity extends AppCompatActivity implements ComunicacionA
 
     private GestorDB gestorDB;
 
+    private String usuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +84,7 @@ public class PeliculaActivity extends AppCompatActivity implements ComunicacionA
         if (extras != null) {
             comApi = new ComunicacionApi(this);
             comApi.getMovieDetails(extras.getString("id"));
+            usuario = extras.getString("usuario");
         }
 
         gestorDB = new GestorDB (this, "DB", null, 1);
@@ -119,7 +122,7 @@ public class PeliculaActivity extends AppCompatActivity implements ComunicacionA
     }
 
     public void onClickFavoritos(View v) {
-        DialogFragment dialogoAñadirFavoritos = new DialogoAñadirFavoritos(id, titulo.getText().toString(), portadaURL);
+        DialogFragment dialogoAñadirFavoritos = new DialogoAñadirFavoritos(usuario, id, titulo.getText().toString(), portadaURL);
         dialogoAñadirFavoritos.show(getSupportFragmentManager(), "añadir_favoritos");
     }
 
@@ -144,7 +147,7 @@ public class PeliculaActivity extends AppCompatActivity implements ComunicacionA
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 
         String fechaVerMasTarde = pYear + "/" + pMonth + "/" + pDayOfMonth;
-        gestorDB.insertarPeliculaVerMasTarde(id, fechaVerMasTarde, titulo.getText().toString(), portadaURL);
+        gestorDB.insertarPeliculaVerMasTarde(usuario, id, fechaVerMasTarde, titulo.getText().toString(), portadaURL);
 
         Toast aviso = Toast.makeText(this, "Película añadida a la lista de 'ver más tarde'.", Toast.LENGTH_LONG);
         aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class DialogoAñadirFavoritos extends DialogFragment {
 
+    private String usuario;
     private String idPelicula;
     private String tituloPelicula;
     private String portadaPelicula;
@@ -26,7 +27,8 @@ public class DialogoAñadirFavoritos extends DialogFragment {
     private String[] opciones;
     private ArrayList<String> elegidos;
 
-    public DialogoAñadirFavoritos(String pId, String pTitulo, String pPortada) {
+    public DialogoAñadirFavoritos(String pUsuario, String pId, String pTitulo, String pPortada) {
+        usuario = pUsuario;
         idPelicula = pId;
         tituloPelicula = pTitulo;
         portadaPelicula = pPortada;
@@ -40,7 +42,7 @@ public class DialogoAñadirFavoritos extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("¿A qué lista de favoritos deseas añadir la película '" + tituloPelicula + "'?");
         gestorDB = new GestorDB (getActivity(), "DB", null, 1);
-        String[] listas = gestorDB.getListasFavoritos(idPelicula);
+        String[] listas = gestorDB.getListasFavoritos(usuario, idPelicula);
         if(listas.length == 0) {
             opciones = new String[]{"Crear nueva lista"};
         }
@@ -69,12 +71,12 @@ public class DialogoAñadirFavoritos extends DialogFragment {
             public void onClick(DialogInterface dialogInterface, int i) {
                 for(String listaElegida : elegidos) {
                     if("Crear nueva lista".equals(listaElegida)){
-                        DialogFragment dialogoCrearListaFavoritos = new DialogoCrearListaFavoritos(idPelicula, tituloPelicula, portadaPelicula);
+                        DialogFragment dialogoCrearListaFavoritos = new DialogoCrearListaFavoritos(usuario, idPelicula, tituloPelicula, portadaPelicula);
                         dialogoCrearListaFavoritos.show(getActivity().getSupportFragmentManager(), "crear_lista_fav");
                         dialogoCrearListaFavoritos.setCancelable(false);
                     }
                     else {
-                        gestorDB.insertarPeliculaFavoritos(listaElegida,idPelicula,tituloPelicula,portadaPelicula);
+                        gestorDB.insertarPeliculaFavoritos(usuario, listaElegida,idPelicula,tituloPelicula,portadaPelicula);
                     }
                 }
                 if(!elegidos.contains("Crear nueva lista")) {

@@ -16,6 +16,7 @@ import com.example.entrega1.GestorDB;
 
 public class DialogoQuitarFavoritos extends DialogFragment {
 
+    private String usuario;
     private String lista;
     private String tituloPelicula;
     private String idPelicula;
@@ -24,7 +25,8 @@ public class DialogoQuitarFavoritos extends DialogFragment {
 
     ListenerdelDialogo miListener;
 
-    public DialogoQuitarFavoritos(String pLista, String pIdPelicula, String pTituloPelicula) {
+    public DialogoQuitarFavoritos(String pUsuario, String pLista, String pIdPelicula, String pTituloPelicula) {
+        usuario = pUsuario;
         lista = pLista;
         tituloPelicula = pTituloPelicula;
         idPelicula = pIdPelicula;
@@ -50,7 +52,7 @@ public class DialogoQuitarFavoritos extends DialogFragment {
         builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                gestorDB.eliminarPeliculaLista(lista, idPelicula);
+                gestorDB.eliminarPeliculaLista(usuario, lista, idPelicula);
                 Toast aviso = Toast.makeText(getActivity(), "La película '" + tituloPelicula + "' se ha eliminado de la lista.", Toast.LENGTH_LONG);
                 aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
                 aviso.show();

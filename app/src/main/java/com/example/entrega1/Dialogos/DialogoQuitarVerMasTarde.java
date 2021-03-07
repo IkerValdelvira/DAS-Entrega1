@@ -15,6 +15,7 @@ import com.example.entrega1.GestorDB;
 
 public class DialogoQuitarVerMasTarde extends DialogFragment {
 
+    private String usuario;
     private String idPelicula;
     private String fechaPelicula;
     private String tituloPelicula;
@@ -23,7 +24,8 @@ public class DialogoQuitarVerMasTarde extends DialogFragment {
 
     ListenerdelDialogo miListener;
 
-    public DialogoQuitarVerMasTarde(String pIdPelicula, String pFechaPelicula, String pTituloPelicula) {
+    public DialogoQuitarVerMasTarde(String pUsuario, String pIdPelicula, String pFechaPelicula, String pTituloPelicula) {
+        usuario = pUsuario;
         tituloPelicula = pTituloPelicula;
         idPelicula = pIdPelicula;
         fechaPelicula = pFechaPelicula;
@@ -49,7 +51,7 @@ public class DialogoQuitarVerMasTarde extends DialogFragment {
         builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                gestorDB.eliminarPeliculaVMT(idPelicula, fechaPelicula);
+                gestorDB.eliminarPeliculaVMT(usuario, idPelicula, fechaPelicula);
                 Toast aviso = Toast.makeText(getActivity(), "La película '" + tituloPelicula + "' se ha eliminado de la lista.", Toast.LENGTH_LONG);
                 aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
                 aviso.show();

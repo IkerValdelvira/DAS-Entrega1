@@ -27,7 +27,10 @@ public class AdaptadorListViewVerMasTarde extends BaseAdapter{
     private String[] titulos;
     private String[] fechas;
 
-    public AdaptadorListViewVerMasTarde(VerMasTardeActivity pContext, String[] pIds, String[] pPortadas, String[] pTitulos, String[] pFechas)  {
+    private String usuario;
+
+    public AdaptadorListViewVerMasTarde(String pUsuario, VerMasTardeActivity pContext, String[] pIds, String[] pPortadas, String[] pTitulos, String[] pFechas)  {
+        usuario = pUsuario;
         contexto = pContext;
         ids = pIds;
         portadas = pPortadas;
@@ -62,7 +65,7 @@ public class AdaptadorListViewVerMasTarde extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 System.out.println(ids[i] + "   " + titulos[i]);
-                DialogFragment dialogoQuitarVerMasTarde = new DialogoQuitarVerMasTarde(ids[i], fechas[i], titulos[i]);
+                DialogFragment dialogoQuitarVerMasTarde = new DialogoQuitarVerMasTarde(usuario, ids[i], fechas[i], titulos[i]);
                 dialogoQuitarVerMasTarde.show(contexto.getSupportFragmentManager(), "quitar_ver_mas_tarde");
             }
         });

@@ -25,7 +25,10 @@ public class AdaptadorListViewFavoritos extends BaseAdapter{
     private String[] portadas;
     private String[] titulos;
 
-    public AdaptadorListViewFavoritos(FavoritosActivity pContext, String pListaSeleccionada, String[] pIds, String[] pPortadas, String[] pTitulos)  {
+    private String usuario;
+
+    public AdaptadorListViewFavoritos(String pUsuario, FavoritosActivity pContext, String pListaSeleccionada, String[] pIds, String[] pPortadas, String[] pTitulos)  {
+        usuario = pUsuario;
         contexto = pContext;
         listaSeleccionada = pListaSeleccionada;
         ids = pIds;
@@ -58,7 +61,7 @@ public class AdaptadorListViewFavoritos extends BaseAdapter{
         botonFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment dialogoQuitarFavoritos = new DialogoQuitarFavoritos(listaSeleccionada, ids[i], titulos[i]);
+                DialogFragment dialogoQuitarFavoritos = new DialogoQuitarFavoritos(usuario, listaSeleccionada, ids[i], titulos[i]);
                 dialogoQuitarFavoritos.show(contexto.getSupportFragmentManager(), "quitar_favoritos");
             }
         });

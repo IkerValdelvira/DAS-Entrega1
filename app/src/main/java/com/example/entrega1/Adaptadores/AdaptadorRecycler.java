@@ -22,7 +22,10 @@ public class AdaptadorRecycler extends RecyclerView.Adapter<ViewHolder> {
     private String[] sinopsis;
     private boolean[] seleccionados;
 
-    public AdaptadorRecycler(String[] pIds, String[] pPortadasURL, String[] pTitulos, String[] pGeneros, String[] pFechas, String[] pPuntuaciones, String[] pIdiomas, String[] pSinopsis) {
+    private String usuario;
+
+    public AdaptadorRecycler(String pUsuario, String[] pIds, String[] pPortadasURL, String[] pTitulos, String[] pGeneros, String[] pFechas, String[] pPuntuaciones, String[] pIdiomas, String[] pSinopsis) {
+        usuario = pUsuario;
         ids = pIds;
         portadasURL = pPortadasURL;
         titulos = pTitulos;
@@ -38,7 +41,7 @@ public class AdaptadorRecycler extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layoutDeCadaItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout,null);
-        ViewHolder viewHolder = new ViewHolder(layoutDeCadaItem);
+        ViewHolder viewHolder = new ViewHolder(usuario, layoutDeCadaItem);
         viewHolder.seleccion = seleccionados;
         return viewHolder;
     }

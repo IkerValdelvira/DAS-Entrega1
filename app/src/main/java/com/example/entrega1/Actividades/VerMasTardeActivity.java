@@ -34,6 +34,8 @@ public class VerMasTardeActivity extends AppCompatActivity implements DialogoQui
 
     private GestorDB gestorDB;
 
+    private String usuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +43,14 @@ public class VerMasTardeActivity extends AppCompatActivity implements DialogoQui
 
         listView = findViewById(R.id.listViewVMT);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            usuario = extras.getString("usuario");
+        }
+
         gestorDB = new GestorDB (this, "DB", null, 1);
 
-        Pelicula[] peliculas = gestorDB.getPeliculasVMT();
+        Pelicula[] peliculas = gestorDB.getPeliculasVMT(usuario);
         ids = new String[peliculas.length];
         portadas = new String[peliculas.length];
         titulos = new String[peliculas.length];
@@ -54,7 +61,7 @@ public class VerMasTardeActivity extends AppCompatActivity implements DialogoQui
             titulos[i] = peliculas[i].getTitulo();
             fechas[i] = peliculas[i].getFechaVerMasTarde();
         }
-        adaptadorListView = new AdaptadorListViewVerMasTarde(VerMasTardeActivity.this,ids,portadas,titulos,fechas);
+        adaptadorListView = new AdaptadorListViewVerMasTarde(usuario, VerMasTardeActivity.this,ids,portadas,titulos,fechas);
         listView.setAdapter(adaptadorListView);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -63,6 +70,7 @@ public class VerMasTardeActivity extends AppCompatActivity implements DialogoQui
                 Intent i = new Intent (VerMasTardeActivity.this, PeliculaActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.putExtra("id", ids[position]);
+                i.putExtra("usuario", usuario);
                 view.getContext().startActivity(i);
             }
         });
@@ -70,7 +78,7 @@ public class VerMasTardeActivity extends AppCompatActivity implements DialogoQui
 
     @Override
     public void alBorrarPelicula() {
-        Pelicula[] peliculas = gestorDB.getPeliculasVMT();
+        Pelicula[] peliculas = gestorDB.getPeliculasVMT(usuario);
         ids = new String[peliculas.length];
         portadas = new String[peliculas.length];
         titulos = new String[peliculas.length];
@@ -81,7 +89,7 @@ public class VerMasTardeActivity extends AppCompatActivity implements DialogoQui
             titulos[i] = peliculas[i].getTitulo();
             fechas[i] = peliculas[i].getFechaVerMasTarde();
         }
-        adaptadorListView = new AdaptadorListViewVerMasTarde(VerMasTardeActivity.this,ids,portadas,titulos,fechas);
+        adaptadorListView = new AdaptadorListViewVerMasTarde(usuario, VerMasTardeActivity.this,ids,portadas,titulos,fechas);
         listView.setAdapter(adaptadorListView);
     }
 

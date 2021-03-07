@@ -25,6 +25,8 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
 
     ComunicacionApi comApi;
 
+    String usuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -38,6 +40,11 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
         recyclerView.setLayoutManager(linearLayout);
 
         comApi = new ComunicacionApi(this);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            usuario = extras.getString("usuario");
+        }
 
     }
 
@@ -64,7 +71,7 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
         String[] idiomas = movieList.get("idiomas");
         String[] sinopsis = movieList.get("sinopsis");
 
-        adaptador = new AdaptadorRecycler(ids,portadasURL,titulos,generos,fechas,puntuaciones,idiomas,sinopsis);
+        adaptador = new AdaptadorRecycler(usuario,ids,portadasURL,titulos,generos,fechas,puntuaciones,idiomas,sinopsis);
         recyclerView.setAdapter(adaptador);
     }
 
