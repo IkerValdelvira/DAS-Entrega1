@@ -2,7 +2,6 @@ package com.example.entrega1.Actividades;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,12 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.example.entrega1.Adaptadores.AdaptadorListView;
+import com.example.entrega1.Adaptadores.AdaptadorListViewFavoritos;
 import com.example.entrega1.Dialogos.DialogoQuitarFavoritos;
 import com.example.entrega1.GestorDB;
+import com.example.entrega1.Modelos.Pelicula;
 import com.example.entrega1.R;
-
-import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
 
@@ -28,7 +26,7 @@ public class FavoritosActivity extends AppCompatActivity implements DialogoQuita
 
     private ListView listView;
 
-    private AdaptadorListView adaptadorListView;
+    private AdaptadorListViewFavoritos adaptadorListView;
     private String[] ids;
     private String[] portadas;
     private String[] titulos;
@@ -54,10 +52,16 @@ public class FavoritosActivity extends AppCompatActivity implements DialogoQuita
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String listaSeleccionada = listas.get(position);
                 posSeleccionada = position;
-                ids = gestorDB.getIdsListaFav(listaSeleccionada);
-                portadas = gestorDB.getPortadasListaFav(listaSeleccionada);
-                titulos = gestorDB.getTitulosListaFav(listaSeleccionada);
-                adaptadorListView = new AdaptadorListView(FavoritosActivity.this,listaSeleccionada,ids,portadas,titulos);
+                Pelicula[] peliculas = gestorDB.getPeliculasListaFav(listaSeleccionada);
+                ids = new String[peliculas.length];
+                portadas = new String[peliculas.length];
+                titulos = new String[peliculas.length];
+                for(int i=0; i<peliculas.length; i++) {
+                    ids[i] = peliculas[i].getId();
+                    portadas[i] = peliculas[i].getPortadaURL();
+                    titulos[i] = peliculas[i].getTitulo();
+                }
+                adaptadorListView = new AdaptadorListViewFavoritos(FavoritosActivity.this,listaSeleccionada,ids,portadas,titulos);
                 listView.setAdapter(adaptadorListView);
 
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

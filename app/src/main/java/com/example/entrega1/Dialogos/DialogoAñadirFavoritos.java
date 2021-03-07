@@ -74,7 +74,7 @@ public class DialogoAñadirFavoritos extends DialogFragment {
                         dialogoCrearListaFavoritos.setCancelable(false);
                     }
                     else {
-                        gestorDB.insertarPelicula(listaElegida,idPelicula,tituloPelicula,portadaPelicula);
+                        gestorDB.insertarPeliculaFavoritos(listaElegida,idPelicula,tituloPelicula,portadaPelicula);
                     }
                 }
                 if(!elegidos.contains("Crear nueva lista")) {
@@ -88,7 +88,7 @@ public class DialogoAñadirFavoritos extends DialogFragment {
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast aviso = Toast.makeText(getActivity(), "La película '" + tituloPelicula + "' no se ha añadido a ninguna lista de favoritos.", Toast.LENGTH_LONG);
+                Toast aviso = Toast.makeText(getActivity(), "La película no se ha añadido a ninguna lista de favoritos.", Toast.LENGTH_LONG);
                 aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
                 aviso.show();
             }

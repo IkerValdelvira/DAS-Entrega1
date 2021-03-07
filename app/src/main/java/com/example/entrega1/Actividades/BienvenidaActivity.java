@@ -14,8 +14,6 @@ public class BienvenidaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bienvenida);
-
-        //this.deleteDatabase("DB");
     }
 
     public void onClickCatalogo(View v) {
@@ -29,7 +27,7 @@ public class BienvenidaActivity extends AppCompatActivity {
     }
 
     public void onClickVerMasTarde(View v) {
-        //Intent i = new Intent (this, VerMasTardeActivity.class);
-        //startActivity(i);
+        Intent i = new Intent (this, VerMasTardeActivity.class);
+        startActivity(i);
     }
 }

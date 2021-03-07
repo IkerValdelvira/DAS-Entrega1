@@ -17,8 +17,6 @@ import androidx.fragment.app.DialogFragment;
 import com.example.entrega1.GestorDB;
 import com.example.entrega1.R;
 
-import java.util.ArrayList;
-
 public class DialogoCrearListaFavoritos extends DialogFragment {
 
     private String idPelicula;
@@ -52,7 +50,7 @@ public class DialogoCrearListaFavoritos extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String nombre = editTextNombre.getText().toString();
-                gestorDB.insertarPelicula(nombre, idPelicula, tituloPelicula, portadaPelicula);
+                gestorDB.insertarPeliculaFavoritos(nombre, idPelicula, tituloPelicula, portadaPelicula);
                 Toast aviso = Toast.makeText(getActivity(), "Lista '" + nombre + "' creada correctamente.", Toast.LENGTH_SHORT);
                 aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
                 aviso.show();

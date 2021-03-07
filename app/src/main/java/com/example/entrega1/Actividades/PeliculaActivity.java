@@ -3,21 +3,31 @@ package com.example.entrega1.Actividades;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.text.LineBreaker;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.entrega1.AlertReceiver;
 import com.example.entrega1.ComunicacionApi;
 import com.example.entrega1.Dialogos.DialogoAñadirFavoritos;
+import com.example.entrega1.Dialogos.DialogoFecha;
+import com.example.entrega1.GestorDB;
 import com.example.entrega1.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.Calendar;
 import java.util.HashMap;
 
-public class PeliculaActivity extends AppCompatActivity implements ComunicacionApi.ListenerApi {
+public class PeliculaActivity extends AppCompatActivity implements ComunicacionApi.ListenerApi, DialogoFecha.ListenerDelDialogo {
 
     private String id;
     private String portadaURL;
@@ -40,6 +50,8 @@ public class PeliculaActivity extends AppCompatActivity implements ComunicacionA
     private ImageView verMasTarde;
 
     private ComunicacionApi comApi;
+
+    private GestorDB gestorDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +83,8 @@ public class PeliculaActivity extends AppCompatActivity implements ComunicacionA
             comApi = new ComunicacionApi(this);
             comApi.getMovieDetails(extras.getString("id"));
         }
+
+        gestorDB = new GestorDB (this, "DB", null, 1);
 
     }
 
@@ -110,7 +124,30 @@ public class PeliculaActivity extends AppCompatActivity implements ComunicacionA
     }
 
     public void onClickVerMasTarde(View v) {
-
+        DialogFragment dialogo= new DialogoFecha();
+        dialogo.show(getSupportFragmentManager(), "fecha");
     }
 
+    @Override
+    public void alPulsarOK(int pYear, int pMonth, int pDayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, pYear);
+        c.set(Calendar.MONTH, pMonth);
+        c.set(Calendar.DAY_OF_MONTH, pDayOfMonth);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        intent.putExtra("id", id);
+        intent.putExtra("titulo", titulo.getText().toString());
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+
+        String fechaVerMasTarde = pYear + "/" + pMonth + "/" + pDayOfMonth;
+        gestorDB.insertarPeliculaVerMasTarde(id, fechaVerMasTarde, titulo.getText().toString(), portadaURL);
+
+        Toast aviso = Toast.makeText(this, "Película añadida a la lista de 'ver más tarde'.", Toast.LENGTH_LONG);
+        aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
+        aviso.show();
+    }
 }

@@ -22,7 +22,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textViewTituloFav"
+        android:id="@+id/textViewFechaFav"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -47,6 +47,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewTituloFav"
+        app:layout_constraintStart_toEndOf="@+id/textViewFechaFav"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

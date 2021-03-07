@@ -9,30 +9,30 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentActivity;
 
 import com.example.entrega1.Actividades.FavoritosActivity;
+import com.example.entrega1.Actividades.VerMasTardeActivity;
 import com.example.entrega1.Dialogos.DialogoQuitarFavoritos;
+import com.example.entrega1.Dialogos.DialogoQuitarVerMasTarde;
 import com.example.entrega1.R;
 import com.squareup.picasso.Picasso;
 
-public class AdaptadorListView extends BaseAdapter{
+public class AdaptadorListViewVerMasTarde extends BaseAdapter{
 
-    private FavoritosActivity contexto;
+    private VerMasTardeActivity contexto;
     private LayoutInflater inflater;
-    private String listaSeleccionada;
     private String[] ids;
     private String[] portadas;
     private String[] titulos;
+    private String[] fechas;
 
-    public AdaptadorListView(FavoritosActivity pContext, String pListaSeleccionada, String[] pIds, String[] pPortadas, String[] pTitulos)  {
+    public AdaptadorListViewVerMasTarde(VerMasTardeActivity pContext, String[] pIds, String[] pPortadas, String[] pTitulos, String[] pFechas)  {
         contexto = pContext;
-        listaSeleccionada = pListaSeleccionada;
         ids = pIds;
         portadas = pPortadas;
         titulos = pTitulos;
+        fechas = pFechas;
         inflater = (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -53,20 +53,23 @@ public class AdaptadorListView extends BaseAdapter{
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = inflater.inflate(R.layout.fila_favoritos,null);
-        ImageView portadaFav = (ImageView) view.findViewById(R.id.imageViewPortadaFav);
-        TextView tituloFav = (TextView) view.findViewById(R.id.textViewTituloFav);
-        Button botonFav = (Button) view.findViewById(R.id.buttonFav);
-        botonFav.setOnClickListener(new View.OnClickListener() {
+        view = inflater.inflate(R.layout.fila_ver_mas_tarde,null);
+        ImageView portadaVMT = view.findViewById(R.id.imageViewPortadaVMT);
+        TextView tituloVMT = view.findViewById(R.id.textViewTituloVMT);
+        TextView fechaVMT = view.findViewById(R.id.textViewFechaVMT);
+        Button botonVMT = view.findViewById(R.id.buttonVMT);
+        botonVMT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment dialogoQuitarFavoritos = new DialogoQuitarFavoritos(listaSeleccionada, ids[i], titulos[i]);
-                dialogoQuitarFavoritos.show(contexto.getSupportFragmentManager(), "quitar_favoritos");
+                System.out.println(ids[i] + "   " + titulos[i]);
+                DialogFragment dialogoQuitarVerMasTarde = new DialogoQuitarVerMasTarde(ids[i], fechas[i], titulos[i]);
+                dialogoQuitarVerMasTarde.show(contexto.getSupportFragmentManager(), "quitar_ver_mas_tarde");
             }
         });
 
-        tituloFav.setText(titulos[i]);
-        Picasso.get().load(portadas[i]).into(portadaFav);
+        tituloVMT.setText(titulos[i]);
+        Picasso.get().load(portadas[i]).into(portadaVMT);
+        fechaVMT.setText(fechas[i]);
         return view;
     }
 

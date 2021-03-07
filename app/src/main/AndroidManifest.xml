@@ -3,6 +3,7 @@
     package="com.example.entrega1">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -11,16 +12,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Entrega1">
-        <activity android:name=".Actividades.FavoritosActivity"></activity>
+        <activity android:name=".Actividades.RegisterActivity"></activity>
+        <activity android:name=".Actividades.BienvenidaActivity" />
+        <activity android:name=".Actividades.FavoritosActivity" />
+        <activity android:name=".Actividades.VerMasTardeActivity" />
         <activity android:name=".Actividades.CatalogoActivity" />
         <activity android:name=".Actividades.PeliculaActivity" />
-        <activity android:name=".Actividades.BienvenidaActivity">
+        <activity android:name=".Actividades.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".AlertReceiver" />
     </application>
 
 </manifest>
