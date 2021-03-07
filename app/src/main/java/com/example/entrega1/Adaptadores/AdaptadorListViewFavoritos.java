@@ -1,6 +1,7 @@
 package com.example.entrega1.Adaptadores;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
 
+import com.example.entrega1.Actividades.ComentariosActivity;
 import com.example.entrega1.Actividades.FavoritosActivity;
 import com.example.entrega1.Dialogos.DialogoQuitarFavoritos;
 import com.example.entrega1.R;
@@ -57,12 +59,24 @@ public class AdaptadorListViewFavoritos extends BaseAdapter{
         view = inflater.inflate(R.layout.fila_favoritos,null);
         ImageView portadaFav = (ImageView) view.findViewById(R.id.imageViewPortadaFav);
         TextView tituloFav = (TextView) view.findViewById(R.id.textViewFechaFav);
-        Button botonFav = (Button) view.findViewById(R.id.buttonFav);
+        Button botonFav = (Button) view.findViewById(R.id.buttonQuitarFav);
         botonFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogFragment dialogoQuitarFavoritos = new DialogoQuitarFavoritos(usuario, listaSeleccionada, ids[i], titulos[i]);
                 dialogoQuitarFavoritos.show(contexto.getSupportFragmentManager(), "quitar_favoritos");
+            }
+        });
+        Button botonComentariosFav = (Button) view.findViewById(R.id.buttonComentariosFav);
+        botonComentariosFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(contexto, ComentariosActivity.class);
+                intent.putExtra("usuario", usuario);
+                intent.putExtra("id", ids[i]);
+                intent.putExtra("portada", portadas[i]);
+                intent.putExtra("titulo", titulos[i]);
+                contexto.startActivity(intent);
             }
         });
 

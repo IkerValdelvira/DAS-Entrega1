@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Entrega1">
-        <activity android:name=".Actividades.RegisterActivity"></activity>
+        <activity android:name=".Actividades.ComentariosActivity"></activity>
+        <activity android:name=".Actividades.RegisterActivity" />
         <activity android:name=".Actividades.BienvenidaActivity" />
         <activity android:name=".Actividades.FavoritosActivity" />
         <activity android:name=".Actividades.VerMasTardeActivity" />

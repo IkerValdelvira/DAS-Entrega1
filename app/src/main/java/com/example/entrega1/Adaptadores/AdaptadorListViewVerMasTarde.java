@@ -64,7 +64,6 @@ public class AdaptadorListViewVerMasTarde extends BaseAdapter{
         botonVMT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(ids[i] + "   " + titulos[i]);
                 DialogFragment dialogoQuitarVerMasTarde = new DialogoQuitarVerMasTarde(usuario, ids[i], fechas[i], titulos[i]);
                 dialogoQuitarVerMasTarde.show(contexto.getSupportFragmentManager(), "quitar_ver_mas_tarde");
             }

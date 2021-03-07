@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, BienvenidaActivity.class);
             intent.putExtra("usuario", usuario);
             startActivity(intent);
-            finish();
+            //finish();
         }
     }
 

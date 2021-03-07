@@ -115,7 +115,6 @@ public class GestorDB extends SQLiteOpenHelper {
 
     public void eliminarPeliculaVMT(String username, String idPelicula, String fechaPelicula) {
         SQLiteDatabase db = getWritableDatabase();
-        System.out.println("DELETE FROM VerMasTarde WHERE Usuario = '" + username + "' AND IdPelicula = " + Integer.parseInt(idPelicula) + " AND Fecha = '" + fechaPelicula + "'");
         db.execSQL("DELETE FROM VerMasTarde WHERE IdPelicula = " + Integer.parseInt(idPelicula) + " AND Fecha = '" + fechaPelicula + "'");
         db.close();
     }
