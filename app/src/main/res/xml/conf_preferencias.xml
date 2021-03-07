@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="preferencias"
+        android:title="Preferencias usuario">
+        <EditTextPreference
+            android:key="nombre"
+            android:title="Nombre"
+            android:summary="Introduce tu nombre:"
+            android:dialogTitle="Introduce un nombre:"
+            android:dialogIcon="@mipmap/ic_launcher" />
+        <ListPreference
+            android:dialogTitle="Elige un género"
+            android:entries="@array/generos"
+            android:entryValues="@array/codigosgeneros"
+            android:key="generopref"
+            android:summary="Elige tu género preferido"
+            android:title="¿Cuál es tu género preferido?" />
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

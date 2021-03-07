@@ -32,10 +32,16 @@ public class ComunicacionApi {
         void alRecogerInfoPelicula(HashMap<String,String> pListaPeliculas);
     }
 
-    public void getMovieList(String pTituloBuscado) {
+    public void getMovieList(String pModo, String pFiltro) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(contextoActividad);
-        String url ="https://api.themoviedb.org/3/search/movie?api_key=4755eb5203850a5be306380eb262c096&query=" + pTituloBuscado;
+        String url = "";
+        if("titulo".equals(pModo)){
+            url ="https://api.themoviedb.org/3/search/movie?api_key=4755eb5203850a5be306380eb262c096&query=" + pFiltro;
+        }
+        else if("genero".equals(pModo)){
+            url ="https://api.themoviedb.org/3/discover/movie?api_key=4755eb5203850a5be306380eb262c096&sort_by=popularity.desc&page=1&with_genres=" + pFiltro;
+        }
 
         // Request a JSON response from the provided URL.
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,

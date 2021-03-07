@@ -33,7 +33,7 @@ public class DialogoQuitarFavoritos extends DialogFragment {
     }
 
     public interface ListenerdelDialogo {
-        void alBorrarPelicula();
+        void alBorrarPelicula(String pUsuario, String pIdPelicula);
     }
 
     @NonNull
@@ -56,7 +56,7 @@ public class DialogoQuitarFavoritos extends DialogFragment {
                 Toast aviso = Toast.makeText(getActivity(), "La película '" + tituloPelicula + "' se ha eliminado de la lista.", Toast.LENGTH_LONG);
                 aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
                 aviso.show();
-                miListener.alBorrarPelicula();
+                miListener.alBorrarPelicula(usuario, idPelicula);
             }
         });
 

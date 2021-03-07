@@ -1,5 +1,7 @@
 package com.example.entrega1.Actividades;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -7,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,6 +43,12 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
         recyclerView.setLayoutManager(linearLayout);
 
         comApi = new ComunicacionApi(this);
+        //SharedPreferences prefs = getSharedPreferences(usuario, Context.MODE_PRIVATE);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String genero = prefs.getString("generopref", "-1");
+        if (!"-1".equals(genero)){
+            comApi.getMovieList("genero", genero);
+        }
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -56,7 +65,7 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
             aviso.show();
         }
         else{
-            comApi.getMovieList(tituloBuscado);
+            comApi.getMovieList("titulo", tituloBuscado);
         }
     }
 

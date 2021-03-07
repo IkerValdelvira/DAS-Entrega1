@@ -91,7 +91,9 @@ public class FavoritosActivity extends AppCompatActivity implements DialogoQuita
     }
 
     @Override
-    public void alBorrarPelicula() {
+    public void alBorrarPelicula(String pUsuario, String pIdPelicula) {
+        this.deleteFile(pUsuario + "_" + pIdPelicula + ".txt");
+
         ArrayList<String> listas = gestorDB.getListasFavoritos(usuario);
         adaptadorSpinner = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listas);
         adaptadorSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
