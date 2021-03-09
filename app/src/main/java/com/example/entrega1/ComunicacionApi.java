@@ -85,48 +85,48 @@ public class ComunicacionApi {
                                     int genreID = generosIDs.getInt(j);
                                     switch (genreID)
                                     {
-                                        case 28:  generos += "Action" + " - ";
+                                        case 28:  generos += contextoActividad.getString(R.string.Accion) + " - ";
                                             break;
-                                        case 12:  generos += "Adventure" + " - ";
+                                        case 12:  generos += contextoActividad.getString(R.string.Aventura) + " - ";
                                             break;
-                                        case 16:  generos += "Animation" + " - ";
+                                        case 16:  generos += contextoActividad.getString(R.string.Animacion) + " - ";
                                             break;
-                                        case 35:  generos += "Comedy" + " - ";
+                                        case 35:  generos += contextoActividad.getString(R.string.Comedia) + " - ";
                                             break;
-                                        case 80:  generos += "Crime" + " - ";
+                                        case 80:  generos += contextoActividad.getString(R.string.Crimen) + " - ";
                                             break;
-                                        case 99:  generos += "Documentary" + " - ";
+                                        case 99:  generos += contextoActividad.getString(R.string.Documental) + " - ";
                                             break;
-                                        case 18:  generos += "Drama" + " - ";
+                                        case 18:  generos += contextoActividad.getString(R.string.Drama) + " - ";
                                             break;
-                                        case 10751:  generos += "Family" + " - ";
+                                        case 10751:  generos += contextoActividad.getString(R.string.Familia) + " - ";
                                             break;
-                                        case 14:  generos += "Fantasy" + " - ";
+                                        case 14:  generos += contextoActividad.getString(R.string.Fantasia) + " - ";
                                             break;
-                                        case 36:  generos += "History" + " - ";
+                                        case 36:  generos += contextoActividad.getString(R.string.Historia) + " - ";
                                             break;
-                                        case 27:  generos += "Horror" + " - ";
+                                        case 27:  generos += contextoActividad.getString(R.string.Terror) + " - ";
                                             break;
-                                        case 10402:  generos += "Music" + " - ";
+                                        case 10402:  generos += contextoActividad.getString(R.string.Musica) + " - ";
                                             break;
-                                        case 9648:  generos += "Mystery" + " - ";
+                                        case 9648:  generos += contextoActividad.getString(R.string.Misterio) + " - ";
                                             break;
-                                        case 10749:  generos += "Romance" + " - ";
+                                        case 10749:  generos += contextoActividad.getString(R.string.Romance) + " - ";
                                             break;
-                                        case 878:  generos += "Science Fiction" + " - ";
+                                        case 878:  generos += contextoActividad.getString(R.string.CienciaFiccion) + " - ";
                                             break;
-                                        case 10770:  generos += "TV Movie" + " - ";
+                                        case 10770:  generos += contextoActividad.getString(R.string.TVPelicula) + " - ";
                                             break;
-                                        case 53:  generos += "Thriller" + " - ";
+                                        case 53:  generos += contextoActividad.getString(R.string.Thriller) + " - ";
                                             break;
-                                        case 10752:  generos += "War" + " - ";
+                                        case 10752:  generos += contextoActividad.getString(R.string.Guerra) + " - ";
                                             break;
-                                        case 37:  generos += "Western" + " - ";
+                                        case 37:  generos += contextoActividad.getString(R.string.Western) + " - ";
                                             break;
                                     }
                                 }
                                 if(generos.isEmpty()) {
-                                    generos = "Sin categorizar.";
+                                    generos = contextoActividad.getString(R.string.SinCategorizar);
                                 }
                                 else {
                                     generos = generos.substring(0,generos.length()-3);
@@ -165,7 +165,7 @@ public class ComunicacionApi {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast aviso = Toast.makeText(contextoActividad, "Algo no funcionó.\nVuelve a intentarlo.", Toast.LENGTH_LONG);
+                        Toast aviso = Toast.makeText(contextoActividad, contextoActividad.getString(R.string.AlgoNoFunciono), Toast.LENGTH_LONG);
                         aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
                         aviso.show();
                     }
@@ -215,7 +215,7 @@ public class ComunicacionApi {
                                 generos += generosArray.getJSONObject(i).getString("name") + " - ";
                             }
                             if(generos.isEmpty()) {
-                                generos = "Sin categorizar.";
+                                generos = contextoActividad.getString(R.string.SinCategorizar);
                             }
                             else {
                                 generos = generos.substring(0,generos.length()-3);
@@ -237,7 +237,7 @@ public class ComunicacionApi {
                                 idiomaDisp += idiomaDispArray.getJSONObject(i).getString("name") + ", ";
                             }
                             if(idiomaDisp.isEmpty()) {
-                                idiomaDisp = "No hay información.";
+                                idiomaDisp = contextoActividad.getString(R.string.NoHayInformacion);
                             }
                             else {
                                 idiomaDisp = idiomaDisp.substring(0,idiomaDisp.length()-2);
@@ -246,7 +246,7 @@ public class ComunicacionApi {
 
                             int presupuesto = response.getInt("budget");
                             if(presupuesto == 0) {
-                                resultado.put("presupuesto", "No hay información.");
+                                resultado.put("presupuesto", contextoActividad.getString(R.string.NoHayInformacion));
                             }
                             else{
                                 resultado.put("presupuesto", String.valueOf(presupuesto) + " USD");
@@ -254,7 +254,7 @@ public class ComunicacionApi {
 
                             int ingresos = response.getInt("revenue");
                             if(ingresos == 0) {
-                                resultado.put("ingresos", "No hay información.");
+                                resultado.put("ingresos", contextoActividad.getString(R.string.NoHayInformacion));
                             }
                             else{
                                 resultado.put("ingresos", String.valueOf(ingresos) + " USD");
@@ -266,7 +266,7 @@ public class ComunicacionApi {
                                 productoras += productorasArray.getJSONObject(i).getString("name") + " (" + productorasArray.getJSONObject(i).getString("origin_country") + "), ";
                             }
                             if(productoras.isEmpty()) {
-                                productoras = "No hay información.";
+                                productoras = contextoActividad.getString(R.string.NoHayInformacion);
                             }
                             else {
                                 productoras = productoras.substring(0,productoras.length()-2);
@@ -286,7 +286,7 @@ public class ComunicacionApi {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast aviso = Toast.makeText(contextoActividad, "Algo no funcionó.\nVuelve a intentarlo.", Toast.LENGTH_LONG);
+                Toast aviso = Toast.makeText(contextoActividad, contextoActividad.getString(R.string.AlgoNoFunciono), Toast.LENGTH_LONG);
                 aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
                 aviso.show();
             }

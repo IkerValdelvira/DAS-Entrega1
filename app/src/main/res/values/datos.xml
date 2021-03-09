@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="generos">
-        <item>Acción</item>
-        <item>Aventura</item>
-        <item>Animación</item>
-        <item>Comedia</item>
-        <item>Crimen</item>
-        <item>Documental</item>
-        <item>Drama</item>
-        <item>Familia</item>
-        <item>Fantasía</item>
-        <item>Historia</item>
-        <item>Horror</item>
-        <item>Música</item>
-        <item>Misterio</item>
-        <item>Romance</item>
-        <item>Ciencia ficción</item>
-        <item>Película TV</item>
-        <item>Thriller</item>
-        <item>Guerra</item>
-        <item>Western</item>
+        <item>@string/Accion</item>
+        <item>@string/Aventura</item>
+        <item>@string/Animacion</item>
+        <item>@string/Comedia</item>
+        <item>@string/Crimen</item>
+        <item>@string/Documental</item>
+        <item>@string/Drama</item>
+        <item>@string/Familia</item>
+        <item>@string/Fantasia</item>
+        <item>@string/Historia</item>
+        <item>@string/Terror</item>
+        <item>@string/Musica</item>
+        <item>@string/Misterio</item>
+        <item>@string/Romance</item>
+        <item>@string/CienciaFiccion</item>
+        <item>@string/TVPelicula</item>
+        <item>@string/Thriller</item>
+        <item>@string/Guerra</item>
+        <item>@string/Western</item>
     </string-array>
     <string-array name="codigosgeneros">
         <item>28</item>

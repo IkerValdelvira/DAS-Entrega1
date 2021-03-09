@@ -40,18 +40,18 @@ public class RegisterActivity extends AppCompatActivity {
         String contrasena1 = password.getText().toString();
         String contrasena2 = paswword2.getText().toString();
         if(usuario.isEmpty() || contrasena1.isEmpty() || contrasena2.isEmpty()) {
-            Toast.makeText(this, "Rellena todos los campos.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.RellenarCampos), Toast.LENGTH_SHORT).show();
         }
         else if(!contrasena1.equals(contrasena2)) {
-            Toast.makeText(this, "Las contraseñas introducidas son diferentes.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.PassDiferentes), Toast.LENGTH_SHORT).show();
         }
         else {
             if (gestorDB.existeUsuario(usuario)) {
-                Toast.makeText(this, "Ya existe este nombre de usuario.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.UsuarioRepetido), Toast.LENGTH_SHORT).show();
             }
             else {
                 gestorDB.insertarUsuario(usuario, contrasena1);
-                Toast.makeText(this, "Usuario registrado correctamente.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.UsuarioRegistrado), Toast.LENGTH_SHORT).show();
                 finish();
             }
         }

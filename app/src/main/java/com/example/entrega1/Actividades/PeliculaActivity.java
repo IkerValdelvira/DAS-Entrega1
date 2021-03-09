@@ -149,7 +149,7 @@ public class PeliculaActivity extends AppCompatActivity implements ComunicacionA
         String fechaVerMasTarde = pYear + "/" + pMonth + "/" + pDayOfMonth;
         gestorDB.insertarPeliculaVerMasTarde(usuario, id, fechaVerMasTarde, titulo.getText().toString(), portadaURL);
 
-        Toast aviso = Toast.makeText(this, "Película añadida a la lista de 'ver más tarde'.", Toast.LENGTH_LONG);
+        Toast aviso = Toast.makeText(this, getString(R.string.AñadidaVMT), Toast.LENGTH_LONG);
         aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
         aviso.show();
     }

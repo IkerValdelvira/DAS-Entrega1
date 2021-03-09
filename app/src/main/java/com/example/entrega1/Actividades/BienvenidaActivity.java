@@ -37,7 +37,7 @@ public class BienvenidaActivity extends AppCompatActivity implements Preferencia
         }
 
         botonPreferencias = findViewById(R.id.buttonPreferencias);
-        botonPreferencias.setText("Mostrar preferencias");
+        botonPreferencias.setText(getString(R.string.MostrarPreferencias));
         preferencias = findViewById(R.id.fragmentPreferencias);
         preferencias.setVisibility(View.INVISIBLE);
         prefsVisibles = 0;
@@ -47,10 +47,10 @@ public class BienvenidaActivity extends AppCompatActivity implements Preferencia
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String nombre = prefs.getString("nombre", "-1");
         if ("-1".equals(nombre)){
-            nombreBienvenida.setText("Bienvenido " + usuario + "!!!");
+            nombreBienvenida.setText(getString(R.string.Bienvenido) + " " + usuario + "!!!");
         }
         else{
-            nombreBienvenida.setText("Bienvenido " + nombre + "!!!");
+            nombreBienvenida.setText(getString(R.string.Bienvenido) + " " + nombre + "!!!");
         }
 
     }
@@ -75,12 +75,12 @@ public class BienvenidaActivity extends AppCompatActivity implements Preferencia
 
     public void onClickPreferencias(View v) {
         if(prefsVisibles == 0){
-            botonPreferencias.setText("Ocultar preferencias");
+            botonPreferencias.setText(getString(R.string.OcultarPreferencias));
             preferencias.setVisibility(View.VISIBLE);
             prefsVisibles = 1;
         }
         else {
-            botonPreferencias.setText("Mostrar preferencias");
+            botonPreferencias.setText(getString(R.string.MostrarPreferencias));
             preferencias.setVisibility(View.INVISIBLE);
             prefsVisibles = 0;
         }
@@ -91,6 +91,6 @@ public class BienvenidaActivity extends AppCompatActivity implements Preferencia
         //SharedPreferences prefs = getSharedPreferences(usuario, Context.MODE_PRIVATE);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String nombre = prefs.getString("nombre", "-1");
-        nombreBienvenida.setText("Bienvenido " + nombre + "!!!");
+        nombreBienvenida.setText(getString(R.string.Bienvenido) + " " + nombre + "!!!");
     }
 }

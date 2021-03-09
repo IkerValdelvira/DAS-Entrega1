@@ -44,10 +44,10 @@ public class LoginActivity extends AppCompatActivity {
         String usuario = username.getText().toString();
         String contrasena = password.getText().toString();
         if(usuario.isEmpty() || contrasena.isEmpty()) {
-            Toast.makeText(this, "Rellena todos los campos.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.RellenarCampos), Toast.LENGTH_SHORT).show();
         }
         else if (!gestorDB.loginCorrecto(usuario, contrasena)) {
-            Toast.makeText(this, "Usuario o contraseña incorrectos.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.UserPassIncorrectos), Toast.LENGTH_SHORT).show();
         }
         else {
             Intent intent = new Intent(this, BienvenidaActivity.class);

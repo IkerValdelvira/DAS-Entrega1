@@ -40,7 +40,7 @@ public class DialogoCrearListaFavoritos extends DialogFragment {
         super.onCreateDialog(savedInstanceState);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Crear nueva lista de favoritos");
+        builder.setTitle(getString(R.string.CrearNuevaLista));
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.anadir_lista_fav,null);
         builder.setView(view);
@@ -48,24 +48,24 @@ public class DialogoCrearListaFavoritos extends DialogFragment {
         EditText editTextNombre = view.findViewById(R.id.ediTextNombre);
         GestorDB gestorDB = new GestorDB (getActivity(), "DB", null, 1);
 
-        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.Aceptar), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String nombre = editTextNombre.getText().toString();
                 gestorDB.insertarPeliculaFavoritos(usuario, nombre, idPelicula, tituloPelicula, portadaPelicula);
-                Toast aviso = Toast.makeText(getActivity(), "Lista '" + nombre + "' creada correctamente.", Toast.LENGTH_SHORT);
+                Toast aviso = Toast.makeText(getActivity(), getString(R.string.ListaCreada), Toast.LENGTH_SHORT);
                 aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
                 aviso.show();
-                aviso = Toast.makeText(getActivity(), "Película añadida a las listas seleccionadas.", Toast.LENGTH_LONG);
+                aviso = Toast.makeText(getActivity(), getString(R.string.PeliculaAnadidaListas), Toast.LENGTH_LONG);
                 aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
                 aviso.show();
             }
         });
 
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.Cancelar), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast aviso = Toast.makeText(getActivity(), "No se ha creado una nueva lista de favoritos.", Toast.LENGTH_SHORT);
+                Toast aviso = Toast.makeText(getActivity(), getString(R.string.NoCreadoLista), Toast.LENGTH_SHORT);
                 aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
                 aviso.show();
             }

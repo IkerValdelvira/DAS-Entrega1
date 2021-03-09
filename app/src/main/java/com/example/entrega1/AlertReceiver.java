@@ -52,11 +52,11 @@ public class AlertReceiver extends BroadcastReceiver {
 
         builder.setSmallIcon(android.R.drawable.stat_sys_warning)
                 .setContentTitle(titulo)
-                .setContentText("Habías planificado ver esta película hoy.")
-                .setSubText("Ver más tarde")
+                .setContentText(context.getString(R.string.PlanificadoPelicula))
+                .setSubText(context.getString(R.string.VerMasTarde))
                 .setVibrate(new long[]{0, 1000, 500, 1000})
                 //.setAutoCancel(true)
-                .addAction(android.R.drawable.alert_dark_frame,"Buscar información", pendingIntentInfo)
+                .addAction(android.R.drawable.alert_dark_frame,context.getString(R.string.BuscarInformacion), pendingIntentInfo)
                 .setAutoCancel(true);;
 
         manager.notify(1, builder.build());

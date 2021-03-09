@@ -60,7 +60,7 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
     public void onClickBuscar(View v) {
         String tituloBuscado = editTextBuscador.getText().toString();
         if(tituloBuscado.isEmpty()){
-            Toast aviso = Toast.makeText(this, "Introduce un título en el buscador.", Toast.LENGTH_LONG);
+            Toast aviso = Toast.makeText(this, getString(R.string.IntroducirTitulo), Toast.LENGTH_LONG);
             aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
             aviso.show();
         }

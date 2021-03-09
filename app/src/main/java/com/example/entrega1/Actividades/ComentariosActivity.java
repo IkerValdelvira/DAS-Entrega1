@@ -52,7 +52,7 @@ public class ComentariosActivity extends AppCompatActivity {
             ficheroInterno.close();
             comentarios.setText(texto);
         } catch (IOException e) {
-            Toast.makeText(this, "No hay ningún comentario todavía.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.NingunComentario), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -63,7 +63,7 @@ public class ComentariosActivity extends AppCompatActivity {
             texto = texto.replaceAll("\n", "<br />");
             fichero.write(texto);
             fichero.close();
-            Toast.makeText(this, "Tu comentario se ha guardado.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.ComentarioGuardado), Toast.LENGTH_LONG).show();
         } catch (IOException e){
             e.printStackTrace();
         }

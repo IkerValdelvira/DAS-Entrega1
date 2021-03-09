@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.entrega1.GestorDB;
+import com.example.entrega1.R;
 
 import java.util.ArrayList;
 
@@ -40,18 +41,18 @@ public class DialogoAñadirFavoritos extends DialogFragment {
         super.onCreateDialog(savedInstanceState);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("¿A qué lista de favoritos deseas añadir la película '" + tituloPelicula + "'?");
+        builder.setTitle(getString(R.string.AQueListaFav));
         gestorDB = new GestorDB (getActivity(), "DB", null, 1);
         String[] listas = gestorDB.getListasFavoritos(usuario, idPelicula);
         if(listas.length == 0) {
-            opciones = new String[]{"Crear nueva lista"};
+            opciones = new String[]{getString(R.string.CrearLista)};
         }
         else {
             opciones = new String[listas.length+1];
             for(int i=0; i<opciones.length-1; i++) {
                 opciones[i] = listas[i];
             }
-            opciones[opciones.length-1] = "Crear nueva lista";
+            opciones[opciones.length-1] = getString(R.string.CrearLista);
         }
         elegidos = new ArrayList<>();
         builder.setMultiChoiceItems(opciones, null, new DialogInterface.OnMultiChoiceClickListener() {
@@ -66,11 +67,11 @@ public class DialogoAñadirFavoritos extends DialogFragment {
             }
         });
 
-        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.Aceptar), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 for(String listaElegida : elegidos) {
-                    if("Crear nueva lista".equals(listaElegida)){
+                    if(getString(R.string.CrearLista).equals(listaElegida)){
                         DialogFragment dialogoCrearListaFavoritos = new DialogoCrearListaFavoritos(usuario, idPelicula, tituloPelicula, portadaPelicula);
                         dialogoCrearListaFavoritos.show(getActivity().getSupportFragmentManager(), "crear_lista_fav");
                         dialogoCrearListaFavoritos.setCancelable(false);
@@ -79,18 +80,18 @@ public class DialogoAñadirFavoritos extends DialogFragment {
                         gestorDB.insertarPeliculaFavoritos(usuario, listaElegida,idPelicula,tituloPelicula,portadaPelicula);
                     }
                 }
-                if(!elegidos.contains("Crear nueva lista")) {
-                    Toast aviso = Toast.makeText(getActivity(), "Película añadida a las listas seleccionadas.", Toast.LENGTH_LONG);
+                if(!elegidos.contains(getString(R.string.CrearCuenta))) {
+                    Toast aviso = Toast.makeText(getActivity(), getString(R.string.PeliculaAnadidaListas), Toast.LENGTH_LONG);
                     aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
                     aviso.show();
                 }
             }
         });
 
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.Cancelar), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast aviso = Toast.makeText(getActivity(), "La película no se ha añadido a ninguna lista de favoritos.", Toast.LENGTH_LONG);
+                Toast aviso = Toast.makeText(getActivity(), getString(R.string.PeliculaNoAnadidaListas), Toast.LENGTH_LONG);
                 aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
                 aviso.show();
             }
