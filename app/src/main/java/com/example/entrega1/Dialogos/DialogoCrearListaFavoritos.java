@@ -38,6 +38,7 @@ public class DialogoCrearListaFavoritos extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
+        setRetainInstance(true);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(getString(R.string.CrearNuevaLista));

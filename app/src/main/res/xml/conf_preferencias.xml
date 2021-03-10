@@ -3,20 +3,27 @@
 
     <PreferenceCategory
         android:key="preferencias"
-        android:title="Preferencias usuario">
+        android:title="@string/PreferenciasUsuario">
         <EditTextPreference
             android:key="nombre"
-            android:title="Nombre"
-            android:summary="Introduce tu nombre:"
-            android:dialogTitle="Introduce un nombre:"
+            android:title="@string/Nombre"
+            android:summary="@string/IntroduceNombre"
+            android:dialogTitle="@string/IntroduceNombre"
             android:dialogIcon="@mipmap/ic_launcher" />
         <ListPreference
-            android:dialogTitle="Elige un género"
+            android:dialogTitle="@string/SeleccionaIdioma"
+            android:entries="@array/idiomas"
+            android:entryValues="@array/codigosidiomas"
+            android:key="idioma"
+            android:summary="@string/QueIdioma"
+            android:title="@string/Idiomas" />
+        <ListPreference
+            android:dialogTitle="@string/EligeGeneroPref"
             android:entries="@array/generos"
             android:entryValues="@array/codigosgeneros"
             android:key="generopref"
-            android:summary="Elige tu género preferido"
-            android:title="¿Cuál es tu género preferido?" />
+            android:summary="@string/CualGeneroPref"
+            android:title="@string/EligeGenero" />
     </PreferenceCategory>
 
 

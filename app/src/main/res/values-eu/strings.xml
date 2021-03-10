@@ -91,4 +91,19 @@
     <string name="SinCategorizar">Kategorizatu gabe</string>
     <string name="AlgoNoFunciono">Zerbaitek ez du funtzionatu. Saiatu berriro.</string>
     <string name="NoHayInformacion">Ez dago informaziorik</string>
+    <string name="Espanol">Gaztelania</string>
+    <string name="Ingles">Ingelesa</string>
+    <string name="Euskera">Euskera</string>
+    <string name="Idiomas">Hizkuntzak</string>
+    <string name="MostrarOcultarPreferencias">Erakutsi/Ezkutatu Lehentasunak</string>
+    <string name="CerrarSesion">Saioa itxi</string>
+    <string name="PreferenciasUsuario">Erabiltzailearen lehentasunak</string>
+    <string name="Nombre">Izena</string>
+    <string name="IntroduceNombre">Zure izena sartu:</string>
+    <string name="EligeGenero">Generoak</string>
+    <string name="EligeGeneroPref">Zure genero gustokoena aukeratu:</string>
+    <string name="CualGeneroPref">Zein da zure genero gustokoen?</string>
+    <string name="SeleccionaIdioma">Hizkuntza aukeratu:</string>
+    <string name="QueIdioma">Zein hizkuntz aukeratu nahi duzu?</string>
+    <string name="Favoritos">Gogokoenak</string>
 </resources>

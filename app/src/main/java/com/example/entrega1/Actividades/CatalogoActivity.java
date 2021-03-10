@@ -2,6 +2,7 @@ package com.example.entrega1.Actividades;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.example.entrega1.ComunicacionApi;
 import com.example.entrega1.R;
 
 import java.util.HashMap;
+import java.util.Locale;
 
 public class CatalogoActivity extends AppCompatActivity implements ComunicacionApi.ListenerApi {
 
@@ -34,6 +36,20 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String idioma = prefs.getString("idioma", "aa");
+        System.out.println("idiooma: " + idioma);
+
+        Locale nuevaloc = new Locale(idioma);
+        Locale.setDefault(nuevaloc);
+        Configuration configuration = getBaseContext().getResources().getConfiguration();
+        configuration.setLocale(nuevaloc);
+        configuration.setLayoutDirection(nuevaloc);
+
+        Context context = getBaseContext().createConfigurationContext(configuration);
+        getBaseContext().getResources().updateConfiguration(configuration, context.getResources().getDisplayMetrics());
+
         setContentView(R.layout.activity_catalogo);
 
         editTextBuscador = findViewById(R.id.editTextBuscador);
@@ -44,7 +60,7 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
 
         comApi = new ComunicacionApi(this);
         //SharedPreferences prefs = getSharedPreferences(usuario, Context.MODE_PRIVATE);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String genero = prefs.getString("generopref", "-1");
         if (!"-1".equals(genero)){
             comApi.getMovieList("genero", genero);

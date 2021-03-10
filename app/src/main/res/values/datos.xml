@@ -42,4 +42,15 @@
         <item>10752</item>
         <item>37</item>
     </string-array>
+
+    <string-array name="idiomas">
+        <item>@string/Espanol</item>
+        <item>@string/Euskera</item>
+        <item>@string/Ingles</item>
+    </string-array>
+    <string-array name="codigosidiomas">
+        <item>es</item>
+        <item>eu</item>
+        <item>en</item>
+    </string-array>
 </resources>

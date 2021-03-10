@@ -91,4 +91,19 @@
     <string name="SinCategorizar">Sin categorizar</string>
     <string name="AlgoNoFunciono">Algo no funcionó. Vuelve a intentarlo.</string>
     <string name="NoHayInformacion">No hay información</string>
+    <string name="Espanol">Español</string>
+    <string name="Ingles">Inglés</string>
+    <string name="Euskera">Euskera</string>
+    <string name="Idiomas">Idiomas</string>
+    <string name="MostrarOcultarPreferencias">Mostrar/Ocultar Preferencias</string>
+    <string name="CerrarSesion">Cerrar sesión</string>
+    <string name="PreferenciasUsuario">Preferencias usuario</string>
+    <string name="Nombre">Nombre</string>
+    <string name="IntroduceNombre">Introduce tu nombre</string>
+    <string name="EligeGenero">Generos</string>
+    <string name="EligeGeneroPref">Elige tu género preferido:</string>
+    <string name="CualGeneroPref">¿Cuál es tu género preferido?</string>
+    <string name="SeleccionaIdioma">Selecciona el idioma:</string>
+    <string name="QueIdioma">¿Qué idioma quieres seleccionar?</string>
+    <string name="Favoritos">Favoritos</string>
 </resources>

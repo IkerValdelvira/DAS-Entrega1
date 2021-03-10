@@ -41,6 +41,7 @@ public class DialogoQuitarFavoritos extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
+        setRetainInstance(true);
 
         miListener = (ListenerdelDialogo)getActivity();
 

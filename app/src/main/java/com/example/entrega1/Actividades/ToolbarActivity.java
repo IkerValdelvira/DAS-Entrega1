@@ -1,6 +1,7 @@
 package com.example.entrega1.Actividades;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -12,11 +13,17 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.entrega1.Adaptadores.AdaptadorListViewFavoritos;
+import com.example.entrega1.Modelos.Pelicula;
+import com.example.entrega1.Preferencias;
 import com.example.entrega1.R;
 
 import java.io.BufferedReader;
@@ -47,16 +54,11 @@ public class ToolbarActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id=item.getItemId();
         switch (id){
-            case R.id.opcion1:{
 
+            case R.id.opcionPreferencias:{
+                Intent intent = new Intent(this, Preferencias.class);
+                startActivity(intent);
             }
-            case R.id.opcion2:{
-
-            }
-            case R.id.opcion3:{
-
-            }
-
         }
         return super.onOptionsItemSelected(item);
     }

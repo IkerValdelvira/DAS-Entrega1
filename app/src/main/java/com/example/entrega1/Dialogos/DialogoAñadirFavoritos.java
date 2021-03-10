@@ -39,6 +39,7 @@ public class DialogoAñadirFavoritos extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
+        setRetainInstance(true);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(getString(R.string.AQueListaFav));
@@ -78,12 +79,10 @@ public class DialogoAñadirFavoritos extends DialogFragment {
                     }
                     else {
                         gestorDB.insertarPeliculaFavoritos(usuario, listaElegida,idPelicula,tituloPelicula,portadaPelicula);
+                        Toast aviso = Toast.makeText(getActivity(), getString(R.string.PeliculaAnadidaListas), Toast.LENGTH_LONG);
+                        aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
+                        aviso.show();
                     }
-                }
-                if(!elegidos.contains(getString(R.string.CrearCuenta))) {
-                    Toast aviso = Toast.makeText(getActivity(), getString(R.string.PeliculaAnadidaListas), Toast.LENGTH_LONG);
-                    aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
-                    aviso.show();
                 }
             }
         });
@@ -99,5 +98,4 @@ public class DialogoAñadirFavoritos extends DialogFragment {
 
         return builder.create();
     }
-
 }

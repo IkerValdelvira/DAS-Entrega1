@@ -11,14 +11,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Entrega1">
-        <activity android:name=".Actividades.ComentariosActivity"></activity>
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".Actividades.ComentariosActivity" />
         <activity android:name=".Actividades.RegisterActivity" />
         <activity android:name=".Actividades.BienvenidaActivity" />
         <activity android:name=".Actividades.FavoritosActivity" />
         <activity android:name=".Actividades.VerMasTardeActivity" />
         <activity android:name=".Actividades.CatalogoActivity" />
         <activity android:name=".Actividades.PeliculaActivity" />
+        <activity android:name=".Actividades.ToolbarActivity" />
         <activity android:name=".Actividades.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

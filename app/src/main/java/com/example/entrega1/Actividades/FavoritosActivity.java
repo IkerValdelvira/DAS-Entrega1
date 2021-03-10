@@ -1,8 +1,12 @@
 package com.example.entrega1.Actividades;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +21,7 @@ import com.example.entrega1.Modelos.Pelicula;
 import com.example.entrega1.R;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class FavoritosActivity extends AppCompatActivity implements DialogoQuitarFavoritos.ListenerdelDialogo {
 
@@ -38,6 +43,19 @@ public class FavoritosActivity extends AppCompatActivity implements DialogoQuita
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String idioma = prefs.getString("idioma", "es");
+
+        Locale nuevaloc = new Locale(idioma);
+        Locale.setDefault(nuevaloc);
+        Configuration configuration = getBaseContext().getResources().getConfiguration();
+        configuration.setLocale(nuevaloc);
+        configuration.setLayoutDirection(nuevaloc);
+
+        Context context = getBaseContext().createConfigurationContext(configuration);
+        getBaseContext().getResources().updateConfiguration(configuration, context.getResources().getDisplayMetrics());
+
         setContentView(R.layout.activity_favoritos);
 
         spinner = findViewById(R.id.spinnerFavoritos);

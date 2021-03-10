@@ -91,4 +91,19 @@
     <string name="SinCategorizar">Uncategorized</string>
     <string name="AlgoNoFunciono">Something did not work. Retry.</string>
     <string name="NoHayInformacion">There is no information</string>
+    <string name="Espanol">Spanish</string>
+    <string name="Ingles">English</string>
+    <string name="Euskera">Basque</string>
+    <string name="Idiomas">Languages</string>
+    <string name="MostrarOcultarPreferencias">Show/Hide Preferences</string>
+    <string name="CerrarSesion">Log out</string>
+    <string name="PreferenciasUsuario">User preferences</string>
+    <string name="Nombre">Name</string>
+    <string name="IntroduceNombre">Insert your name:</string>
+    <string name="EligeGenero">Genres</string>
+    <string name="EligeGeneroPref">Choose your favourite genre:</string>
+    <string name="CualGeneroPref">Which is your favorite genre?</string>
+    <string name="SeleccionaIdioma">Select language:</string>
+    <string name="QueIdioma">Which language do you want to select?</string>
+    <string name="Favoritos">Favorites</string>
 </resources>
