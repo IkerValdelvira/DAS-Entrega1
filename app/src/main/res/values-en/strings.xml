@@ -106,4 +106,5 @@
     <string name="SeleccionaIdioma">Select language:</string>
     <string name="QueIdioma">Which language do you want to select?</string>
     <string name="Favoritos">Favorites</string>
+    <string name="SeleccionarLista">Select list:</string>
 </resources>

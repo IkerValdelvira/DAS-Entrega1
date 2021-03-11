@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class BienvenidaActivity extends AppCompatActivity implements Preferencia
     private View preferencias;
     private int prefsVisibles;
 
+    private ImageView logo;
     private TextView nombreBienvenida;
 
     @Override
@@ -59,9 +61,20 @@ public class BienvenidaActivity extends AppCompatActivity implements Preferencia
             usuario = extras.getString("usuario");
         }
 
+        logo = findViewById(R.id.imageViewLogo);
+        logo.setImageResource(R.drawable.logo);
+
         preferencias = findViewById(R.id.fragmentPreferencias);
-        preferencias.setVisibility(View.INVISIBLE);
         prefsVisibles = 0;
+        if (savedInstanceState != null) {
+            prefsVisibles = savedInstanceState.getInt("prefsVisibles");
+        }
+        if(prefsVisibles == 0){
+            preferencias.setVisibility(View.INVISIBLE);
+        }
+        else {
+            preferencias.setVisibility(View.VISIBLE);
+        }
 
         nombreBienvenida = findViewById(R.id.textViewBienvenida);
         //SharedPreferences prefs = getSharedPreferences(usuario, Context.MODE_PRIVATE);
@@ -159,5 +172,11 @@ public class BienvenidaActivity extends AppCompatActivity implements Preferencia
 
         finish();
         startActivity(getIntent());
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("prefsVisibles", prefsVisibles);
     }
 }

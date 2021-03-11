@@ -57,6 +57,8 @@ public class LoginActivity extends AppCompatActivity {
 
         gestorDB = new GestorDB(this, "DB", null, 1);
 
+        loginImage.setImageResource(R.drawable.login);
+
     }
 
     public void onClickLogin(View v) {
