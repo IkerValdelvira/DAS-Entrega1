@@ -13,11 +13,6 @@ import android.os.Bundle;
 
 import androidx.core.app.NotificationCompat;
 
-import com.example.entrega1.Actividades.PeliculaActivity;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 public class AlertReceiver extends BroadcastReceiver {
 
     @Override

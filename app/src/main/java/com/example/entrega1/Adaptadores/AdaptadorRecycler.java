@@ -1,3 +1,4 @@
+
 package com.example.entrega1.Adaptadores;
 
 import android.view.LayoutInflater;
@@ -7,10 +8,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.entrega1.Fragments.CatalogoFragment;
 import com.example.entrega1.R;
 import com.squareup.picasso.Picasso;
 
 public class AdaptadorRecycler extends RecyclerView.Adapter<ViewHolder> {
+
+    private CatalogoFragment.ListenerFragment listenerFragment;
 
     private String[] ids;
     private String[] portadasURL;
@@ -24,7 +28,8 @@ public class AdaptadorRecycler extends RecyclerView.Adapter<ViewHolder> {
 
     private String usuario;
 
-    public AdaptadorRecycler(String pUsuario, String[] pIds, String[] pPortadasURL, String[] pTitulos, String[] pGeneros, String[] pFechas, String[] pPuntuaciones, String[] pIdiomas, String[] pSinopsis) {
+    public AdaptadorRecycler(CatalogoFragment.ListenerFragment pListenerFragment, String pUsuario, String[] pIds, String[] pPortadasURL, String[] pTitulos, String[] pGeneros, String[] pFechas, String[] pPuntuaciones, String[] pIdiomas, String[] pSinopsis) {
+        listenerFragment = pListenerFragment;
         usuario = pUsuario;
         ids = pIds;
         portadasURL = pPortadasURL;
@@ -56,6 +61,13 @@ public class AdaptadorRecycler extends RecyclerView.Adapter<ViewHolder> {
         holder.puntuacion.setText(puntuaciones[position]);
         holder.idioma.setText(idiomas[position]);
         holder.sinopsis.setText(sinopsis[position]);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listenerFragment.seleccionarElemento(usuario, holder.id);
+            }
+        });
     }
 
     @Override

@@ -22,8 +22,8 @@ public class GestorDB extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE Usuarios ('Usuario' VARCHAR(255) NOT NULL PRIMARY KEY, 'Contrasena' VARCHAR(255))");
-        db.execSQL("CREATE TABLE ListasFavoritos ('Usuario' VARCHAR(255), 'Nombre' VARCHAR(255) NOT NULL, 'IdPelicula' INTEGER NOT NULL, 'Titulo' VARCHAR(255), 'Portada' VARCHAR(500), PRIMARY KEY(Nombre,IdPelicula))");
-        db.execSQL("CREATE TABLE VerMasTarde ('Usuario' VARCHAR(255), 'IdPelicula' INTEGER NOT NULL, 'Fecha' VARCHAR(255) NOT NULL, 'Titulo' VARCHAR(255), 'Portada' VARCHAR(500), PRIMARY KEY(IdPelicula,Fecha))");
+        db.execSQL("CREATE TABLE ListasFavoritos ('Usuario' VARCHAR(255), 'Nombre' VARCHAR(255) NOT NULL, 'IdPelicula' INTEGER NOT NULL, 'Titulo' VARCHAR(255), 'Portada' VARCHAR(500), PRIMARY KEY(Usuario,Nombre,IdPelicula))");
+        db.execSQL("CREATE TABLE VerMasTarde ('Usuario' VARCHAR(255), 'IdPelicula' INTEGER NOT NULL, 'Fecha' VARCHAR(255) NOT NULL, 'Titulo' VARCHAR(255), 'Portada' VARCHAR(500), PRIMARY KEY(Usuario,IdPelicula,Fecha))");
     }
 
     @Override
@@ -59,6 +59,7 @@ public class GestorDB extends SQLiteOpenHelper {
 
     public void insertarPeliculaFavoritos(String username, String lista, String id, String titulo, String portada) {
         SQLiteDatabase db = getWritableDatabase();
+        System.out.println("USERNAME:" + username );
         Cursor c = db.rawQuery("SELECT * FROM ListasFavoritos WHERE Usuario = '" + username + "' AND Nombre = '" + lista + "' AND IdPelicula = " + Integer.parseInt(id),null);
         if(c.getCount() == 0) {
             db.execSQL("INSERT INTO ListasFavoritos VALUES ('" + username + "', '" + lista + "', " + Integer.parseInt(id) + ", '" + titulo + "', '" + portada + "')");

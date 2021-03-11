@@ -7,24 +7,17 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
-import com.example.entrega1.Adaptadores.AdaptadorListViewFavoritos;
 import com.example.entrega1.Adaptadores.AdaptadorListViewVerMasTarde;
-import com.example.entrega1.Dialogos.DialogoQuitarFavoritos;
 import com.example.entrega1.Dialogos.DialogoQuitarVerMasTarde;
 import com.example.entrega1.GestorDB;
 import com.example.entrega1.Modelos.Pelicula;
 import com.example.entrega1.R;
 
-import org.apache.commons.lang3.ArrayUtils;
-
-import java.util.ArrayList;
 import java.util.Locale;
 
 public class VerMasTardeActivity extends AppCompatActivity implements DialogoQuitarVerMasTarde.ListenerdelDialogo {

@@ -29,7 +29,7 @@ public class ComunicacionApi {
 
     public interface ListenerApi {
         void alRecogerListaPeliculas(HashMap<String,String[]> pListaPeliculas);
-        void alRecogerInfoPelicula(HashMap<String,String> pListaPeliculas);
+        void alRecogerInfoPelicula(HashMap<String,String> pPelicula);
     }
 
     public void getMovieList(String pModo, String pFiltro) {
@@ -155,6 +155,7 @@ public class ComunicacionApi {
                             resultado.put("idiomas", idiomasArray);
                             resultado.put("sinopsis", sinopsisArray);
 
+                            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                             miListener.alRecogerListaPeliculas(resultado);
 
                         } catch (JSONException e) {

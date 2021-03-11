@@ -1,32 +1,29 @@
 package com.example.entrega1.Actividades;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.entrega1.Adaptadores.AdaptadorRecycler;
 import com.example.entrega1.ComunicacionApi;
+import com.example.entrega1.Dialogos.DialogoFecha;
+import com.example.entrega1.Fragments.CatalogoFragment;
+import com.example.entrega1.Fragments.PeliculaFragmentHoriz;
+import com.example.entrega1.Fragments.PeliculaFragmentVert;
 import com.example.entrega1.R;
 
 import java.util.HashMap;
 import java.util.Locale;
 
-public class CatalogoActivity extends AppCompatActivity implements ComunicacionApi.ListenerApi {
+public class CatalogoActivity extends AppCompatActivity implements ComunicacionApi.ListenerApi, CatalogoFragment.ListenerFragment, DialogoFecha.ListenerDelDialogo {
 
-    EditText editTextBuscador;
-    RecyclerView recyclerView;
-    AdaptadorRecycler adaptador;
-    LinearLayoutManager linearLayout;
+    CatalogoFragment catalogoFragment;
+    PeliculaFragmentVert peliculaFragmentVert;
+    PeliculaFragmentHoriz peliculaFragmentHoriz;
 
     ComunicacionApi comApi;
 
@@ -34,12 +31,10 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String idioma = prefs.getString("idioma", "aa");
-        System.out.println("idiooma: " + idioma);
+        String idioma = prefs.getString("idioma", "es");
 
         Locale nuevaloc = new Locale(idioma);
         Locale.setDefault(nuevaloc);
@@ -52,11 +47,13 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
 
         setContentView(R.layout.activity_catalogo);
 
-        editTextBuscador = findViewById(R.id.editTextBuscador);
-
-        recyclerView = findViewById(R.id.recyclerView);
-        linearLayout = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(linearLayout);
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE){
+            catalogoFragment = (CatalogoFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentCatalogoHoriz);
+        }
+        else{
+            catalogoFragment = (CatalogoFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentCatalogoVert);
+        }
 
         comApi = new ComunicacionApi(this);
         //SharedPreferences prefs = getSharedPreferences(usuario, Context.MODE_PRIVATE);
@@ -73,36 +70,52 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
 
     }
 
-    public void onClickBuscar(View v) {
-        String tituloBuscado = editTextBuscador.getText().toString();
-        if(tituloBuscado.isEmpty()){
-            Toast aviso = Toast.makeText(this, getString(R.string.IntroducirTitulo), Toast.LENGTH_LONG);
-            aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
-            aviso.show();
+    @Override
+    public void seleccionarElemento(String pUsuario, String pId) {
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE){
+            //EL OTRO FRAGMENT EXISTE
+            peliculaFragmentHoriz = (PeliculaFragmentHoriz) getSupportFragmentManager().findFragmentById(R.id.fragmentPeliculaHoriz);
+            comApi.getMovieDetails(pId);
         }
         else{
-            comApi.getMovieList("titulo", tituloBuscado);
+            //EL OTRO FRAGMENT NO EXISTE, HAY QUE LANZAR LA ACTIVIDAD QUE LO CONTIENE
+            Intent i= new Intent(this, PeliculaActivity.class);
+            i.putExtra("usuario", pUsuario);
+            i.putExtra("id", pId);
+            startActivity(i);
         }
     }
 
     @Override
     public void alRecogerListaPeliculas(HashMap<String,String[]> movieList) {
-        String[] ids = movieList.get("ids");
-        String[] portadasURL = movieList.get("portadasURL");
-        String[] titulos = movieList.get("titulos");
-        String[] generos = movieList.get("generos");
-        String[] fechas = movieList.get("fechas");
-        String[] puntuaciones = movieList.get("puntuaciones");
-        String[] idiomas = movieList.get("idiomas");
-        String[] sinopsis = movieList.get("sinopsis");
-
-        adaptador = new AdaptadorRecycler(usuario,ids,portadasURL,titulos,generos,fechas,puntuaciones,idiomas,sinopsis);
-        recyclerView.setAdapter(adaptador);
+        catalogoFragment.setListaPeliculas(movieList);
     }
 
     @Override
-    public void alRecogerInfoPelicula(HashMap<String, String> pListaPeliculas) {
-
+    public void alRecogerInfoPelicula(HashMap<String, String> pPelicula) {
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE){
+            peliculaFragmentHoriz.setPelicula(usuario, pPelicula);
+        }
+        else{
+            peliculaFragmentVert.setPelicula(usuario, pPelicula);
+        }
     }
+
+    @Override
+    public void alPulsarOK(int pYear, int pMonth, int pDayOfMonth) {
+        peliculaFragmentHoriz.notificacionVMT(pYear,pMonth,pDayOfMonth);
+    }
+
+    /*
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        //Save the fragment's instance
+        getSupportFragmentManager().putFragment(outState, "catalogoFragment", catalogoFragment);
+    }
+    */
 
 }

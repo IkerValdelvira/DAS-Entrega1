@@ -2,7 +2,6 @@ package com.example.entrega1.Actividades;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
 import android.content.Context;
@@ -13,14 +12,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.entrega1.ComunicacionApi;
 import com.example.entrega1.Preferencias;
 import com.example.entrega1.R;
 
@@ -90,6 +84,7 @@ public class BienvenidaActivity extends AppCompatActivity implements Preferencia
     }
 
     public void onClickCatalogo(View v) {
+        //Intent i = new Intent(this, CatalogoActivity.class);
         Intent i = new Intent(this, CatalogoActivity.class);
         i.putExtra("usuario", usuario);
         startActivity(i);

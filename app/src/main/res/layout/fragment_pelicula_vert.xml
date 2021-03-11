@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Actividades.PeliculaActivity">
 
-    <ImageView
-        android:id="@+id/imageViewPortadaP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
-        app:layout_constraintEnd_toStartOf="@+id/scrollView2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/scrollView2"
-        tools:srcCompat="@tools:sample/avatars" />
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -29,18 +18,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="350dp"
+        android:id="@+id/scrollViewPeliculaFragmentHoriz"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.897">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -111,6 +100,29 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/textViewGenerosP"
                 app:layout_constraintTop_toBottomOf="@+id/textViewTextoPuntuacionP" />
+
+            <ImageView
+                android:id="@+id/imageViewPortadaP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/textView18P"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="+18"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imageViewPortadaP"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -305,28 +317,32 @@
         android:id="@+id/imageViewVerMasTarde"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:onClick="onClickVerMasTarde"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewFavoritos"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageViewFavoritos"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollViewPeliculaFragmentHoriz"
+        app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/imageViewFavoritos"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginTop="20dp"
         android:onClick="onClickFavoritos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/scrollView2"
-        app:layout_constraintTop_toTopOf="@+id/scrollView2"
-        app:layout_constraintVertical_bias="0.25"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollViewPeliculaFragmentHoriz"
+        app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textViewAnadirFavoritos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -336,7 +352,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageViewFavoritos" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textViewAnadirVMT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -344,17 +360,5 @@
         app:layout_constraintEnd_toEndOf="@+id/imageViewVerMasTarde"
         app:layout_constraintStart_toStartOf="@+id/imageViewVerMasTarde"
         app:layout_constraintTop_toBottomOf="@+id/imageViewVerMasTarde" />
-
-    <TextView
-        android:id="@+id/textView18P"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="+18"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewPortadaP"
-        app:layout_constraintStart_toStartOf="@+id/imageViewPortadaP"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewPortadaP" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

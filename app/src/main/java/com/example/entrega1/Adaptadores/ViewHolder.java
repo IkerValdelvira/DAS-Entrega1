@@ -1,6 +1,5 @@
 package com.example.entrega1.Adaptadores;
 
-import android.content.Intent;
 import android.graphics.text.LineBreaker;
 import android.os.Build;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.entrega1.Actividades.PeliculaActivity;
 import com.example.entrega1.R;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
@@ -28,6 +26,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     public ViewHolder(String pUsuario, @NonNull View itemView){
         super(itemView);
+
         usuario = pUsuario;
         portada = itemView.findViewById(R.id.imageViewPortada);
         titulo = itemView.findViewById(R.id.textViewTitulo);
@@ -40,15 +39,38 @@ public class ViewHolder extends RecyclerView.ViewHolder {
             sinopsis.setJustificationMode(LineBreaker.JUSTIFICATION_MODE_INTER_WORD);
         }
 
+        /*
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Pelicula2 pelicula = new Pelicula2(usuario, id);
+                //elListener.seleccionarElemento(pelicula);
+                System.out.println(id);
+
+                int orientation = view.getResources().getConfiguration().orientation;
+                if (orientation == Configuration.ORIENTATION_LANDSCAPE){
+                    //EL OTRO FRAGMENT EXISTE
+                    //PeliculaFragment peliculaFragment = (PeliculaFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentPeliculaHoriz);
+                    //peliculaFragment.setPelicula(pelicula);
+                    System.out.println("HORIZONTAL");
+                }
+                else{
+                    //EL OTRO FRAGMENT NO EXISTE, HAY QUE LANZAR LA ACTIVIDAD QUE LO CONTIENE
+                    Intent i= new Intent(view.getContext(), PeliculaActivity2.class);
+                    i.putExtra("id", id);
+                    i.putExtra("usuario", usuario);
+                    view.getContext().startActivity(i);
+                }
+
+
                 Intent i = new Intent (view.getContext(), PeliculaActivity.class);
                 i.putExtra("id", id);
                 i.putExtra("usuario", usuario);
                 view.getContext().startActivity(i);
+
             }
         });
+        */
     }
 
 }
