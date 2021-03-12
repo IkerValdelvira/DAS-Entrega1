@@ -4,12 +4,6 @@
     <PreferenceCategory
         android:key="preferencias"
         android:title="@string/PreferenciasUsuario">
-        <EditTextPreference
-            android:key="nombre"
-            android:title="@string/Nombre"
-            android:summary="@string/IntroduceNombre"
-            android:dialogTitle="@string/IntroduceNombre"
-            android:dialogIcon="@mipmap/ic_launcher" />
         <ListPreference
             android:dialogTitle="@string/SeleccionaIdioma"
             android:entries="@array/idiomas"

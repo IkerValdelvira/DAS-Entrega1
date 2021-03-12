@@ -107,4 +107,8 @@
     <string name="QueIdioma">Which language do you want to select?</string>
     <string name="Favoritos">Favorites</string>
     <string name="SeleccionarLista">Select list:</string>
+    <string name="QuitarVMT">Remove from Watch Later</string>
+    <string name="ComentariosNot">Comments</string>
+    <string name="ComentarioGuardadoNot">You saved a file with comments.</string>
+    <string name="AbrirFichero">Open file</string>
 </resources>

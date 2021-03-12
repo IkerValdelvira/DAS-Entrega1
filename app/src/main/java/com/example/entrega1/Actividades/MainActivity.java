@@ -73,13 +73,7 @@ public class MainActivity extends AppCompatActivity implements Preferencias.List
         nombreBienvenida = findViewById(R.id.textViewBienvenida);
         //SharedPreferences prefs = getSharedPreferences(usuario, Context.MODE_PRIVATE);
         //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String nombre = prefs.getString("nombre", "-1");
-        if ("-1".equals(nombre)){
-            nombreBienvenida.setText(getString(R.string.Bienvenido) + " " + usuario + "!!!");
-        }
-        else{
-            nombreBienvenida.setText(getString(R.string.Bienvenido) + " " + nombre + "!!!");
-        }
+        nombreBienvenida.setText(getString(R.string.Bienvenido) + " " + usuario + "!!!");
 
     }
 
@@ -100,14 +94,6 @@ public class MainActivity extends AppCompatActivity implements Preferencias.List
         Intent i = new Intent (this, VerMasTardeActivity.class);
         i.putExtra("usuario", usuario);
         startActivity(i);
-    }
-
-    @Override
-    public void alCambiarNombre() {
-        //SharedPreferences prefs = getSharedPreferences(usuario, Context.MODE_PRIVATE);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String nombre = prefs.getString("nombre", "-1");
-        nombreBienvenida.setText(getString(R.string.Bienvenido) + " " + nombre + "!!!");
     }
 
     @Override

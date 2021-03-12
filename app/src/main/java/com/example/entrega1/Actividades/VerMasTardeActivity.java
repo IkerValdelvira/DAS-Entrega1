@@ -1,5 +1,6 @@
 package com.example.entrega1.Actividades;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -54,12 +55,20 @@ public class VerMasTardeActivity extends AppCompatActivity implements DialogoQui
 
         listView = findViewById(R.id.listViewVMT);
 
+        gestorDB = new GestorDB (this, "DB", null, 1);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             usuario = extras.getString("usuario");
+            int id_notificacion = extras.getInt("id_notificacion");
+            if(id_notificacion == 1) {
+                NotificationManager manager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+                manager.cancel(id_notificacion);
+                String pelicula = extras.getString("pelicula");
+                String fecha = extras.getString("fecha");
+                gestorDB.eliminarPeliculaVMT(usuario, pelicula, fecha);
+            }
         }
-
-        gestorDB = new GestorDB (this, "DB", null, 1);
 
         Pelicula[] peliculas = gestorDB.getPeliculasVMT(usuario);
         ids = new String[peliculas.length];

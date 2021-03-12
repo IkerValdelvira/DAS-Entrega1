@@ -103,7 +103,6 @@ public class PeliculaFragmentVert extends Fragment {
         imageViewFavoritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(usuario);
                 DialogFragment dialogoAñadirFavoritos = new DialogoAñadirFavoritos(usuario, id, titulo.getText().toString(), portadaURL);
                 dialogoAñadirFavoritos.show(getActivity().getSupportFragmentManager(), "añadir_favoritos");
             }
@@ -152,16 +151,19 @@ public class PeliculaFragmentVert extends Fragment {
         c.set(Calendar.YEAR, pYear);
         c.set(Calendar.MONTH, pMonth);
         c.set(Calendar.DAY_OF_MONTH, pDayOfMonth);
+        String fechaVerMasTarde = pYear + "/" + pMonth + "/" + pDayOfMonth;
 
         AlarmManager alarmManager = (AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getActivity(), AlertReceiver.class);
+        intent.setAction("alarma");
+        intent.putExtra("usuario", usuario);
         intent.putExtra("id", id);
         intent.putExtra("titulo", titulo.getText().toString());
+        intent.putExtra("fecha", fechaVerMasTarde);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 
-        String fechaVerMasTarde = pYear + "/" + pMonth + "/" + pDayOfMonth;
         gestorDB.insertarPeliculaVerMasTarde(usuario, id, fechaVerMasTarde, titulo.getText().toString(), portadaURL);
 
         Toast aviso = Toast.makeText(getActivity(), getString(R.string.AñadidaVMT), Toast.LENGTH_LONG);

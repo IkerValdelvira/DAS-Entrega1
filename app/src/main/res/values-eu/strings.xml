@@ -107,4 +107,8 @@
     <string name="QueIdioma">Zein hizkuntz aukeratu nahi duzu?</string>
     <string name="Favoritos">Gogokoenak</string>
     <string name="SeleccionarLista">Zerrenda aukeratu:</string>
+    <string name="QuitarVMT">Geroago Ikusi-tik kenu</string>
+    <string name="ComentariosNot">Komentarioak</string>
+    <string name="ComentarioGuardadoNot">Fitxategi bat komentarioekin gorde duzu.</string>
+    <string name="AbrirFichero">Fitxategia ireki</string>
 </resources>

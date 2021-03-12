@@ -12,7 +12,6 @@ public class Preferencias extends PreferenceFragmentCompat implements SharedPref
     ListenerPreferencias miListener;
 
     public interface ListenerPreferencias {
-        void alCambiarNombre();
         void alCambiarIdioma();
     }
 
@@ -25,14 +24,8 @@ public class Preferencias extends PreferenceFragmentCompat implements SharedPref
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-        switch (s) {
-            case "nombre":
-                miListener.alCambiarNombre();
-                break;
-            case "idioma":
-                miListener.alCambiarIdioma();
-            default:
-                break;
+        if("idioma".equals(s)){
+            miListener.alCambiarIdioma();
         }
     }
 

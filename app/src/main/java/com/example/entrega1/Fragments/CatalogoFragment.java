@@ -26,14 +26,14 @@ import java.util.HashMap;
 
 public class CatalogoFragment extends Fragment {
 
-    EditText editTextBuscador;
-    RecyclerView recyclerView;
-    AdaptadorRecycler adaptador;
-    LinearLayoutManager linearLayout;
+    private EditText editTextBuscador;
+    private RecyclerView recyclerView;
+    private AdaptadorRecycler adaptador;
+    private LinearLayoutManager linearLayout;
 
-    ComunicacionApi comApi;
+    private ComunicacionApi comApi;
 
-    String usuario;
+    private String usuario;
 
     private ListenerFragment elListener;
 
@@ -119,22 +119,12 @@ public class CatalogoFragment extends Fragment {
     }
 
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("tituloBuscado", editTextBuscador.getText().toString());
-        System.out.println("SAVE");
+    public EditText getEditTextBuscador() {
+        return editTextBuscador;
     }
 
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        editTextBuscador = getView().findViewById(R.id.editTextBuscador);
-        if(savedInstanceState != null) {
-            System.out.println("SE HA METIDO");
-            editTextBuscador.setText(savedInstanceState.getString("tituloBuscado"));
-            comApi.getMovieList("titulo", editTextBuscador.getText().toString());
-        }
+    public void setTextBuscador(String pTitulo) {
+        editTextBuscador.setText(pTitulo);
     }
+
 }

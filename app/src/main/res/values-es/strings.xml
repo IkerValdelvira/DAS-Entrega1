@@ -107,4 +107,8 @@
     <string name="QueIdioma">¿Qué idioma quieres seleccionar?</string>
     <string name="Favoritos">Favoritos</string>
     <string name="SeleccionarLista">Seleccionar lista:</string>
+    <string name="QuitarVMT">Quitar de Ver Más Tarde</string>
+    <string name="ComentariosNot">Comentarios</string>
+    <string name="ComentarioGuardadoNot">Has guardado un fichero con comentarios.</string>
+    <string name="AbrirFichero">Abrir fichero</string>
 </resources>

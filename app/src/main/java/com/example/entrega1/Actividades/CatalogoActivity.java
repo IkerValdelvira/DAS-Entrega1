@@ -1,5 +1,6 @@
 package com.example.entrega1.Actividades;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.widget.EditText;
 
 import com.example.entrega1.ComunicacionApi;
 import com.example.entrega1.Dialogos.DialogoFecha;
@@ -68,6 +70,8 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
             usuario = extras.getString("usuario");
         }
 
+
+
     }
 
     @Override
@@ -108,14 +112,19 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
         peliculaFragmentHoriz.notificacionVMT(pYear,pMonth,pDayOfMonth);
     }
 
-    /*
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
-        //Save the fragment's instance
-        getSupportFragmentManager().putFragment(outState, "catalogoFragment", catalogoFragment);
+        outState.putString("tituloBuscado", catalogoFragment.getEditTextBuscador().getText().toString());
     }
-    */
 
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if(savedInstanceState != null) {
+            String tituloBuscado = savedInstanceState.getString("tituloBuscado");
+            comApi.getMovieList("titulo", tituloBuscado);
+            catalogoFragment.setTextBuscador(tituloBuscado);
+        }
+    }
 }
