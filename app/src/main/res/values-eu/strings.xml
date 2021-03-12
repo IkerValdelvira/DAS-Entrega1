@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Entrega1</string>
+    <string name="app_name">DAS Movies</string>
     <string name="VerCatalogoPeliculas">Pelikula katalogoa ikusi</string>
     <string name="VerListasFavoritos">Gogokoen zerrendak ikusi</string>
     <string name="VerMasTarde">Ikusi geroago</string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Entrega1</string>
+    <string name="app_name">DAS Movies</string>
     <string name="VerCatalogoPeliculas">See movie catalog</string>
     <string name="VerListasFavoritos">See favorites lists</string>
     <string name="VerMasTarde">Watch later</string>

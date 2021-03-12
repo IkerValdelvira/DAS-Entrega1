@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Actividades.BienvenidaActivity">
+    tools:context=".Actividades.MainActivity">
 
     <Button
-        android:id="@+id/buttonQuitarFav"
+        android:id="@+id/buttonVerCatalogo"
+        style="@style/CustomStyleParaButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -15,14 +16,15 @@
         android:layout_marginEnd="20dp"
         android:onClick="onClickCatalogo"
         android:text="@string/VerCatalogoPeliculas"
-        android:textSize="14sp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewLogo" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonVerFavoritos"
+        style="@style/CustomStyleParaButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -30,13 +32,15 @@
         android:layout_marginEnd="20dp"
         android:onClick="onClickFavoritos"
         android:text="@string/VerListasFavoritos"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonQuitarFav" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonVerCatalogo" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonVerMasTarde"
+        style="@style/CustomStyleParaButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -44,11 +48,12 @@
         android:layout_marginEnd="20dp"
         android:onClick="onClickVerMasTarde"
         android:text="@string/VerMasTarde"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/buttonVerFavoritos"
         app:layout_constraintVertical_bias="0.0" />
 
     <fragment
@@ -68,19 +73,21 @@
 
     <TextView
         android:id="@+id/textViewBienvenida"
+        style="@style/CustomStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="TextView"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewLogo"
-        app:layout_constraintEnd_toEndOf="@+id/buttonQuitarFav"
+        app:layout_constraintEnd_toEndOf="@+id/buttonVerCatalogo"
         app:layout_constraintStart_toEndOf="@+id/imageViewLogo"
         app:layout_constraintTop_toTopOf="@+id/imageViewLogo" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarPrincipal"
+        style="@style/CustomStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -95,9 +102,9 @@
         android:layout_width="150dp"
         android:layout_height="120dp"
         android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="@+id/buttonQuitarFav"
+        app:layout_constraintEnd_toEndOf="@+id/buttonVerCatalogo"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/buttonQuitarFav"
+        app:layout_constraintStart_toStartOf="@+id/buttonVerCatalogo"
         app:layout_constraintTop_toBottomOf="@+id/toolbarPrincipal"
         tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,7 +20,7 @@ import com.example.entrega1.R;
 
 import java.util.Locale;
 
-public class BienvenidaActivity extends AppCompatActivity implements Preferencias.ListenerPreferencias {
+public class MainActivity extends AppCompatActivity implements Preferencias.ListenerPreferencias {
 
     private String usuario;
 
@@ -46,7 +46,7 @@ public class BienvenidaActivity extends AppCompatActivity implements Preferencia
         Context context = getBaseContext().createConfigurationContext(configuration);
         getBaseContext().getResources().updateConfiguration(configuration, context.getResources().getDisplayMetrics());
 
-        setContentView(R.layout.activity_bienvenida);
+        setContentView(R.layout.activity_main);
 
         setSupportActionBar(findViewById(R.id.toolbarPrincipal));
 

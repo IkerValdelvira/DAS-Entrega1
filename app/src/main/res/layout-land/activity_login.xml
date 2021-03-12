@@ -15,6 +15,7 @@
         app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"
         tools:srcCompat="@tools:sample/avatars" />
 
     <EditText
@@ -30,7 +31,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageViewLogin"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.120000005" />
 
     <EditText
         android:id="@+id/editTextContraseña"
@@ -48,6 +49,7 @@
 
     <Button
         android:id="@+id/buttonLogin"
+        style="@style/CustomStyleParaButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -59,6 +61,7 @@
 
     <TextView
         android:id="@+id/textView"
+        style="@style/CustomStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -69,13 +72,14 @@
 
     <TextView
         android:id="@+id/textViewRegistrarse"
+        style="@style/CustomStyleParaTextViewCrearCuenta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:onClick="onClickRegistrarse"
         android:text="@string/CrearCuenta"
         android:textColor="#009688"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/editTextContraseña"

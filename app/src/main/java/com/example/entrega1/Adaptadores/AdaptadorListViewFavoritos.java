@@ -58,7 +58,7 @@ public class AdaptadorListViewFavoritos extends BaseAdapter{
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflater.inflate(R.layout.fila_favoritos,null);
         ImageView portadaFav = (ImageView) view.findViewById(R.id.imageViewPortadaFav);
-        TextView tituloFav = (TextView) view.findViewById(R.id.textViewFechaFav);
+        TextView tituloFav = (TextView) view.findViewById(R.id.textViewTituloFav);
         Button botonFav = (Button) view.findViewById(R.id.buttonQuitarFav);
         botonFav.setOnClickListener(new View.OnClickListener() {
             @Override

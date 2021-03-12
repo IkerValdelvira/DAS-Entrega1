@@ -8,6 +8,7 @@
 
     <TextView
         android:id="@+id/textView3"
+        style="@style/CustomStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -19,12 +20,13 @@
 
     <ScrollView
         android:id="@+id/scrollViewPeliculaFragmentHoriz"
+        style="@style/CustomStyleParaScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="65dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -311,8 +313,7 @@
         android:id="@+id/imageViewVerMasTarde"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:onClick="onClickVerMasTarde"
+        android:layout_marginTop="5dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -326,8 +327,7 @@
         android:id="@+id/imageViewFavoritos"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:onClick="onClickFavoritos"
+        android:layout_marginTop="5dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -336,27 +336,5 @@
         app:layout_constraintTop_toBottomOf="@+id/scrollViewPeliculaFragmentHoriz"
         app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/textViewAnadirFavoritos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/AñadirFavoritos"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewFavoritos"
-        app:layout_constraintStart_toStartOf="@+id/imageViewFavoritos"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFavoritos" />
-
-    <TextView
-        android:id="@+id/textViewAnadirVMT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/VerMasTardeP"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewVerMasTarde"
-        app:layout_constraintStart_toStartOf="@+id/imageViewVerMasTarde"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewVerMasTarde" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

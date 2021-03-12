@@ -68,7 +68,8 @@ public class FavoritosActivity extends AppCompatActivity implements DialogoQuita
 
         gestorDB = new GestorDB (this, "DB", null, 1);
         ArrayList<String> listas = gestorDB.getListasFavoritos(usuario);
-        adaptadorSpinner = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, listas);
+        adaptadorSpinner = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_selected_layout, listas);
+        //adaptadorSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adaptadorSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adaptadorSpinner);
 

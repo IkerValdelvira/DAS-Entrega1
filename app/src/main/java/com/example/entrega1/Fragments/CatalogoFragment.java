@@ -118,13 +118,23 @@ public class CatalogoFragment extends Fragment {
 
     }
 
-    /*
+
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("tituloBuscado", editTextBuscador.getText().toString());
         System.out.println("SAVE");
     }
-    */
 
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        editTextBuscador = getView().findViewById(R.id.editTextBuscador);
+        if(savedInstanceState != null) {
+            System.out.println("SE HA METIDO");
+            editTextBuscador.setText(savedInstanceState.getString("tituloBuscado"));
+            comApi.getMovieList("titulo", editTextBuscador.getText().toString());
+        }
+    }
 }

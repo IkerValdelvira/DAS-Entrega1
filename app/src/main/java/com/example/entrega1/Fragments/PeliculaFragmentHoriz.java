@@ -123,8 +123,6 @@ public class PeliculaFragmentHoriz extends Fragment {
         getView().findViewById(R.id.scrollViewPeliculaFragmentHoriz).setVisibility(View.VISIBLE);
         getView().findViewById(R.id.imageViewFavoritos).setVisibility(View.VISIBLE);
         getView().findViewById(R.id.imageViewVerMasTarde).setVisibility(View.VISIBLE);
-        getView().findViewById(R.id.textViewAnadirFavoritos).setVisibility(View.VISIBLE);
-        getView().findViewById(R.id.textViewAnadirVMT).setVisibility(View.VISIBLE);
 
         usuario = pUsuario;
         id = pInfoPelicula.get("id");

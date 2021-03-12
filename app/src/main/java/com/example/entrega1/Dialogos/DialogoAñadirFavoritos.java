@@ -62,7 +62,7 @@ public class DialogoAñadirFavoritos extends DialogFragment {
                 if (b == true){
                     elegidos.add(opciones[i]);
                 }
-                else if (elegidos.contains(i)){
+                else {
                     elegidos.remove(opciones[i]);
                 }
             }
@@ -79,10 +79,12 @@ public class DialogoAñadirFavoritos extends DialogFragment {
                     }
                     else {
                         gestorDB.insertarPeliculaFavoritos(usuario, listaElegida,idPelicula,tituloPelicula,portadaPelicula);
-                        Toast aviso = Toast.makeText(getActivity(), getString(R.string.PeliculaAnadidaListas), Toast.LENGTH_LONG);
-                        aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
-                        aviso.show();
                     }
+                }
+                if(!elegidos.contains(getString(R.string.CrearLista))){
+                    Toast aviso = Toast.makeText(getActivity(), getString(R.string.PeliculaAnadidaListas), Toast.LENGTH_LONG);
+                    aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
+                    aviso.show();
                 }
             }
         });

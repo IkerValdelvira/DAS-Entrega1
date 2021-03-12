@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Entrega1</string>
+    <string name="app_name">DAS Movies</string>
     <string name="VerCatalogoPeliculas">Ver catálogo de películas</string>
     <string name="VerListasFavoritos">Ver listas de favoritos</string>
     <string name="VerMasTarde">Ver más tarde</string>

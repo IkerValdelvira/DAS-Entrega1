@@ -42,6 +42,7 @@
 
     <Button
         android:id="@+id/buttonLogin"
+        style="@style/CustomStyleParaButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -53,6 +54,7 @@
 
     <TextView
         android:id="@+id/textView"
+        style="@style/CustomStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -63,13 +65,14 @@
 
     <TextView
         android:id="@+id/textViewRegistrarse"
+        style="@style/CustomStyleParaTextViewCrearCuenta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:onClick="onClickRegistrarse"
         android:text="@string/CrearCuenta"
         android:textColor="#009688"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

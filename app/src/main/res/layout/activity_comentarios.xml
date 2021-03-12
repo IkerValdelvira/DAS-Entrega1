@@ -8,6 +8,7 @@
 
     <TextView
         android:id="@+id/textView9"
+        style="@style/CustomStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -31,10 +32,12 @@
 
     <TextView
         android:id="@+id/textViewTituloC"
-        android:layout_width="wrap_content"
+        style="@style/CustomStyle"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:text="TextView"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewPortadaC"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,6 +66,7 @@
 
     <TextView
         android:id="@+id/textView16"
+        style="@style/CustomStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -73,6 +77,7 @@
 
     <Button
         android:id="@+id/buttonGuardarComentarios"
+        style="@style/CustomStyleParaButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
