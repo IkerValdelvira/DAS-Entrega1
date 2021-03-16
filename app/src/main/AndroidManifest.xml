@@ -13,14 +13,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Entrega1">
+        android:theme="@style/CustomTheme">
 
         <activity android:name=".Actividades.PeliculaActivity"></activity>
         <activity android:name=".Actividades.CatalogoActivity" />
         <activity android:name=".Actividades.ComentariosActivity" />
         <activity android:name=".Actividades.RegisterActivity" />
         <activity android:name=".Actividades.MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/CustomThemeParaMain"/>
         <activity android:name=".Actividades.FavoritosActivity" />
         <activity android:name=".Actividades.VerMasTardeActivity" />
         <activity android:name=".Actividades.ToolbarActivity" />

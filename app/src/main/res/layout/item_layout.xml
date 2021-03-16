@@ -26,7 +26,7 @@
 
         <TextView
             android:id="@+id/textViewTitulo"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
@@ -40,12 +40,13 @@
 
         <TextView
             android:id="@+id/textViewGeneros"
-            android:layout_width="250dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:text="generos"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageViewPortada"
@@ -53,11 +54,13 @@
 
         <TextView
             android:id="@+id/textViewFecha"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/FechaLanzamiento"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageViewPortada"
@@ -70,10 +73,11 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:text="@string/Puntuacion"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageViewPortada"
-            app:layout_constraintTop_toBottomOf="@+id/textViewFecha" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewFechaTexto" />
 
         <TextView
             android:id="@+id/textViewIdioma"
@@ -82,19 +86,21 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:text="@string/Idioma"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageViewPortada"
-            app:layout_constraintTop_toBottomOf="@+id/textViewPuntuacion" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewPuntuacionTexto" />
 
         <TextView
             android:id="@+id/textViewSinopsis"
-            android:layout_width="wrap_content"
+            android:layout_width="359dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:text="@string/Sinopsis"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -102,13 +108,14 @@
 
         <TextView
             android:id="@+id/textViewTextoSinopsis"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="10dp"
             android:text="sinopsis"
             android:textAlignment="viewStart"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -116,25 +123,25 @@
 
         <TextView
             android:id="@+id/textViewFechaTexto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="0dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:text="fecha"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/textViewFecha"
-            app:layout_constraintTop_toBottomOf="@+id/textViewGeneros" />
+            app:layout_constraintStart_toEndOf="@+id/imageViewPortada"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFecha" />
 
         <TextView
             android:id="@+id/textViewPuntuacionTexto"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:text="puntuacion"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textViewPuntuacion"
@@ -142,12 +149,13 @@
 
         <TextView
             android:id="@+id/textViewIdiomaTexto"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:text="idioma"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textViewIdioma"

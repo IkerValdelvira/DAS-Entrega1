@@ -8,10 +8,11 @@
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:text="@string/IntroducirNombreLista"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -20,10 +21,11 @@
 
     <EditText
         android:id="@+id/ediTextNombre"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
         android:hint="@string/EscribirNombre"
         android:inputType="textPersonName"

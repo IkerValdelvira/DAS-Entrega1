@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.entrega1.Fragments.CatalogoFragment;
 import com.example.entrega1.Preferencias;
 import com.example.entrega1.R;
 
@@ -63,11 +64,16 @@ public class MainActivity extends AppCompatActivity implements Preferencias.List
         if (savedInstanceState != null) {
             prefsVisibles = savedInstanceState.getInt("prefsVisibles");
         }
-        if(prefsVisibles == 0){
+
+        if(prefsVisibles == 0 && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             preferencias.setVisibility(View.INVISIBLE);
         }
-        else {
+        else if(prefsVisibles == 1 && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             preferencias.setVisibility(View.VISIBLE);
+        }
+        else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            preferencias.setVisibility(View.VISIBLE);
+            prefsVisibles = 1;
         }
 
         nombreBienvenida = findViewById(R.id.textViewBienvenida);
@@ -124,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements Preferencias.List
             startActivity(i);
         }
         else if(id == R.id.opcionPreferencias) {
-            if(prefsVisibles == 0){
+            if(prefsVisibles == 0 ){
                 preferencias.setVisibility(View.VISIBLE);
                 prefsVisibles = 1;
             }

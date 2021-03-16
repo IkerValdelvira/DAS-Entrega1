@@ -6,84 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Actividades.MainActivity">
 
-    <Button
-        android:id="@+id/buttonVerCatalogo"
-        style="@style/CustomStyleParaButton"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
-        android:onClick="onClickCatalogo"
-        android:text="@string/VerCatalogoPeliculas"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo" />
-
-    <Button
-        android:id="@+id/buttonVerFavoritos"
-        style="@style/CustomStyleParaButton"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
-        android:onClick="onClickFavoritos"
-        android:text="@string/VerListasFavoritos"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonVerCatalogo" />
-
-    <Button
-        android:id="@+id/buttonVerMasTarde"
-        style="@style/CustomStyleParaButton"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
-        android:onClick="onClickVerMasTarde"
-        android:text="@string/VerMasTarde"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonVerFavoritos"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <fragment
-        android:id="@+id/fragmentPreferencias"
-        android:name="com.example.entrega1.Preferencias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="320dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarPrincipal"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textViewBienvenida"
-        style="@style/CustomStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="TextView"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewLogo"
-        app:layout_constraintEnd_toEndOf="@+id/buttonVerCatalogo"
-        app:layout_constraintStart_toEndOf="@+id/imageViewLogo"
-        app:layout_constraintTop_toTopOf="@+id/imageViewLogo" />
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarPrincipal"
         style="@style/CustomStyle"
@@ -96,14 +18,96 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageViewLogo"
-        android:layout_width="150dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="@+id/buttonVerCatalogo"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/buttonVerCatalogo"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarPrincipal"
-        tools:srcCompat="@tools:sample/avatars" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPrincipal">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="300dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewBienvenida"
+                style="@style/CustomStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                android:text="TextView"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewLogo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageViewLogo"
+                app:layout_constraintTop_toTopOf="@+id/imageViewLogo" />
+
+            <ImageView
+                android:id="@+id/imageViewLogo"
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <Button
+                android:id="@+id/buttonVerFavoritos"
+                style="@style/CustomStyleParaButton"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:onClick="onClickFavoritos"
+                android:text="@string/VerListasFavoritos"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/buttonVerCatalogo"
+                app:layout_constraintStart_toStartOf="@+id/buttonVerCatalogo"
+                app:layout_constraintTop_toBottomOf="@+id/buttonVerCatalogo" />
+
+            <Button
+                android:id="@+id/buttonVerCatalogo"
+                style="@style/CustomStyleParaButton"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:onClick="onClickCatalogo"
+                android:text="@string/VerCatalogoPeliculas"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewLogo" />
+
+            <Button
+                android:id="@+id/buttonVerMasTarde"
+                style="@style/CustomStyleParaButton"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
+                android:onClick="onClickVerMasTarde"
+                android:text="@string/VerMasTarde"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/buttonVerFavoritos"
+                app:layout_constraintStart_toStartOf="@+id/buttonVerFavoritos"
+                app:layout_constraintTop_toBottomOf="@+id/buttonVerFavoritos"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <fragment
+            android:id="@+id/fragmentPreferencias"
+            android:name="com.example.entrega1.Preferencias"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
