@@ -20,11 +20,13 @@
 
     <ImageView
         android:id="@+id/imageViewPortadaC"
-        android:layout_width="150dp"
-        android:layout_height="200dp"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editTextComentarios"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
         app:layout_constraintVertical_bias="0.100000024"
@@ -33,10 +35,11 @@
     <TextView
         android:id="@+id/textViewTituloC"
         style="@style/CustomStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="TextView"
+        android:textAlignment="center"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageViewPortadaC"
@@ -46,18 +49,20 @@
 
     <EditText
         android:id="@+id/editTextComentarios"
-        android:layout_width="500dp"
-        android:layout_height="135dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/EscribirComentarios"
         android:inputType="textMultiLine"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/buttonGuardarComentarios"
-        app:layout_constraintTop_toBottomOf="@+id/textView16"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toTopOf="@+id/buttonGuardarComentarios"
+        app:layout_constraintEnd_toStartOf="@+id/buttonGuardarComentarios"
+        app:layout_constraintStart_toEndOf="@+id/imageViewPortadaC"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <TextView
         android:id="@+id/textView16"
@@ -73,12 +78,13 @@
         style="@style/CustomStyleParaButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:onClick="onClickGuardar"
         android:text="@string/Guardar"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextComentarios" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

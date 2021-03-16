@@ -20,7 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
-import com.example.entrega1.AlertReceiver;
+import com.example.entrega1.Alarmas.AlarmReceiver;
 import com.example.entrega1.ComunicacionApi;
 import com.example.entrega1.Dialogos.DialogoAñadirFavoritos;
 import com.example.entrega1.Dialogos.DialogoFecha;
@@ -154,17 +154,20 @@ public class PeliculaFragmentVert extends Fragment {
         String fechaVerMasTarde = pYear + "/" + pMonth + "/" + pDayOfMonth;
 
         AlarmManager alarmManager = (AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(getActivity(), AlertReceiver.class);
+        Intent intent = new Intent(getActivity(), AlarmReceiver.class);
         intent.setAction("alarma");
         intent.putExtra("usuario", usuario);
         intent.putExtra("id", id);
         intent.putExtra("titulo", titulo.getText().toString());
-        intent.putExtra("fecha", fechaVerMasTarde);
+        intent.putExtra("anyo", pYear);
+        intent.putExtra("mes", pMonth);
+        intent.putExtra("dia", pDayOfMonth);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 
         gestorDB.insertarPeliculaVerMasTarde(usuario, id, fechaVerMasTarde, titulo.getText().toString(), portadaURL);
+        gestorDB.insertarAlarma(usuario, id, pYear, pMonth, pDayOfMonth, titulo.getText().toString(), fechaVerMasTarde);
 
         Toast aviso = Toast.makeText(getActivity(), getString(R.string.AñadidaVMT), Toast.LENGTH_LONG);
         aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);

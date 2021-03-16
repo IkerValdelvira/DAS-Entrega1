@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.entrega1.Modelos.Alarma;
 import com.example.entrega1.Modelos.Pelicula;
 
 import java.lang.reflect.Array;
@@ -24,6 +25,7 @@ public class GestorDB extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE Usuarios ('Usuario' VARCHAR(255) NOT NULL PRIMARY KEY, 'Contrasena' VARCHAR(255))");
         db.execSQL("CREATE TABLE ListasFavoritos ('Usuario' VARCHAR(255), 'Nombre' VARCHAR(255) NOT NULL, 'IdPelicula' INTEGER NOT NULL, 'Titulo' VARCHAR(255), 'Portada' VARCHAR(500), PRIMARY KEY(Usuario,Nombre,IdPelicula))");
         db.execSQL("CREATE TABLE VerMasTarde ('Usuario' VARCHAR(255), 'IdPelicula' INTEGER NOT NULL, 'Fecha' VARCHAR(255) NOT NULL, 'Titulo' VARCHAR(255), 'Portada' VARCHAR(500), PRIMARY KEY(Usuario,IdPelicula,Fecha))");
+        db.execSQL("CREATE TABLE AlarmasPendientes ('Usuario' VARCHAR(255), 'IdPelicula' INTEGER NOT NULL, 'Anyo' INT NOT NULL, 'Mes' INT NOT NULL, 'Dia' INT NOT NULL, 'Titulo' VARCHAR(255), PRIMARY KEY(Usuario,IdPelicula,Anyo,Mes,Dia))");
     }
 
     @Override
@@ -99,6 +101,16 @@ public class GestorDB extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void insertarAlarma(String username, String id, int anyo, int mes, int dia, String titulo, String fecha) {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM VerMasTarde WHERE Usuario = '" + username + "' AND IdPelicula = " + Integer.parseInt(id) + " AND Fecha = '" + fecha + "'",null);
+        if(c.getCount() == 0) {
+            db.execSQL("INSERT INTO AlarmasPendientes VALUES ('" + username + "', " + Integer.parseInt(id) + ", " + anyo + ", " + mes + ", " + dia + ", '"+ titulo + "')");
+        }
+        c.close();
+        db.close();
+    }
+
     public Pelicula[] getPeliculasVMT(String username) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery("SELECT IdPelicula, Fecha, Titulo, Portada FROM VerMasTarde WHERE Usuario = '" + username + "'",null);
@@ -116,7 +128,13 @@ public class GestorDB extends SQLiteOpenHelper {
 
     public void eliminarPeliculaVMT(String username, String idPelicula, String fechaPelicula) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM VerMasTarde WHERE IdPelicula = " + Integer.parseInt(idPelicula) + " AND Fecha = '" + fechaPelicula + "'");
+        db.execSQL("DELETE FROM VerMasTarde WHERE Usuario = '" + username + "' AND IdPelicula = " + Integer.parseInt(idPelicula) + " AND Fecha = '" + fechaPelicula + "'");
+        db.close();
+    }
+
+    public void eliminarAlarma(String username, String idPelicula, int anyo, int mes, int dia) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM AlarmasPendientes WHERE Usuario = '" + username + "' AND IdPelicula = " + Integer.parseInt(idPelicula) + " AND Anyo = " + anyo + " AND Mes = " + mes + " AND Dia = " + dia);
         db.close();
     }
 
@@ -145,5 +163,16 @@ public class GestorDB extends SQLiteOpenHelper {
         else {
             return true;
         }
+    }
+
+    public ArrayList<Alarma> getAlarmasPendientes() {
+        ArrayList<Alarma> resultado = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM AlarmasPendientes",null);
+        while (c.moveToNext()){
+            Alarma alarma = new Alarma(c.getString(0), String.valueOf(c.getInt(1)), c.getInt(2), c.getInt(3), c.getInt(4), c.getString(5));
+            resultado.add(alarma);
+        }
+        return resultado;
     }
 }

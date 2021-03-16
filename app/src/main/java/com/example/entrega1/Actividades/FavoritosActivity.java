@@ -95,6 +95,7 @@ public class FavoritosActivity extends AppCompatActivity implements DialogoQuita
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                         Intent i = new Intent (FavoritosActivity.this, PeliculaActivity.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        i.putExtra("usuario", usuario);
                         i.putExtra("id", ids[position]);
                         view.getContext().startActivity(i);
                     }

@@ -123,8 +123,10 @@ public class CatalogoActivity extends AppCompatActivity implements ComunicacionA
         super.onRestoreInstanceState(savedInstanceState);
         if(savedInstanceState != null) {
             String tituloBuscado = savedInstanceState.getString("tituloBuscado");
-            comApi.getMovieList("titulo", tituloBuscado);
-            catalogoFragment.setTextBuscador(tituloBuscado);
+            if(!tituloBuscado.isEmpty()){
+                comApi.getMovieList("titulo", tituloBuscado);
+                catalogoFragment.setTextBuscador(tituloBuscado);
+            }
         }
     }
 }

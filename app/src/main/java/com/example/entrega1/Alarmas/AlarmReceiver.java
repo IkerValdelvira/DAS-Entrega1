@@ -1,4 +1,4 @@
-package com.example.entrega1;
+package com.example.entrega1.Alarmas;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -15,8 +15,10 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.entrega1.Actividades.PeliculaActivity;
 import com.example.entrega1.Actividades.VerMasTardeActivity;
+import com.example.entrega1.GestorDB;
+import com.example.entrega1.R;
 
-public class AlertReceiver extends BroadcastReceiver {
+public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -40,12 +42,16 @@ public class AlertReceiver extends BroadcastReceiver {
             String usuario = "";
             String id = "";
             String titulo = "";
-            String fecha = "";
+            int anyo = 0;
+            int mes = 0;
+            int dia = 0;
             if (extras != null) {
                 usuario = extras.getString("usuario");
                 id = extras.getString("id");
                 titulo = extras.getString("titulo");
-                fecha = extras.getString("fecha");
+                anyo = extras.getInt("anyo");
+                mes = extras.getInt("mes");
+                dia = extras.getInt("dia");
             }
 
             // Intent "Abrir pelicula"
@@ -64,12 +70,14 @@ public class AlertReceiver extends BroadcastReceiver {
             i3.putExtra("id_notificacion", 1);
             i3.putExtra("usuario", usuario);
             i3.putExtra("pelicula", id);
-            i3.putExtra("fecha", fecha);
+            i3.putExtra("anyo", anyo);
+            i3.putExtra("mes", mes);
+            i3.putExtra("dia", dia);
             PendingIntent pendingIntentQuitarVMT = PendingIntent.getActivity(context, 0, i3, PendingIntent.FLAG_UPDATE_CURRENT);
 
             builder.setSmallIcon(android.R.drawable.ic_notification_overlay)
                     .setContentTitle(titulo)
-                    .setContentText(context.getString(R.string.PlanificadoPelicula))
+                    .setContentText(usuario + "!!! " + context.getString(R.string.PlanificadoPelicula))
                     .setSubText(context.getString(R.string.VerMasTarde))
                     .setVibrate(new long[]{0, 1000, 500, 1000})
                     .setAutoCancel(true)
@@ -78,6 +86,10 @@ public class AlertReceiver extends BroadcastReceiver {
                     .setContentIntent(pendingIntent);
 
             manager.notify(1, builder.build());
+
+            GestorDB gestorDB = new GestorDB(context, "DB", null, 1);
+            gestorDB.eliminarAlarma(usuario, id, anyo, mes, dia);
+
         }
 
     }

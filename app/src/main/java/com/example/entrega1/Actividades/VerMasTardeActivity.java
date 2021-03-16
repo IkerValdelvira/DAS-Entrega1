@@ -65,8 +65,10 @@ public class VerMasTardeActivity extends AppCompatActivity implements DialogoQui
                 NotificationManager manager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
                 manager.cancel(id_notificacion);
                 String pelicula = extras.getString("pelicula");
-                String fecha = extras.getString("fecha");
-                gestorDB.eliminarPeliculaVMT(usuario, pelicula, fecha);
+                int anyo = extras.getInt("anyo");
+                int mes = extras.getInt("mes");
+                int dia = extras.getInt("dia");
+                gestorDB.eliminarPeliculaVMT(usuario, pelicula, anyo + "/" + mes + "/" + dia);
             }
         }
 
