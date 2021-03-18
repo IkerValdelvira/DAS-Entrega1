@@ -31,11 +31,13 @@ import com.squareup.picasso.Picasso;
 import java.util.Calendar;
 import java.util.HashMap;
 
+// Fragment que muestra los detalles de una película seleccionada y da opciones de marcarla como favorita o 'ver más tarde'
+// Se utiliza en la actividad PeliculaActivity
 public class PeliculaFragmentVert extends Fragment {
 
+    // Datos de la película y elementos necesarios del layout 'fragment_pelicula_vert.xml'
     private String id;
     private String portadaURL;
-
     private TextView titulo;
     private ImageView portada;
     private TextView adulto;
@@ -49,25 +51,25 @@ public class PeliculaFragmentVert extends Fragment {
     private TextView ingresos;
     private TextView productoras;
     private TextView sinopsis;
-
     private ImageView favoritos;
     private ImageView verMasTarde;
 
-    private ComunicacionApi comApi;
+    private GestorDB gestorDB;          // Instancia para realizar la comunicación con la base de datos local
 
-    private GestorDB gestorDB;
+    private String usuario;             // Nombre del usuario que ha creado la actividad
 
-    private String usuario;
-
+    // Enlaza la clase del fragment con su layout correspondiente 'fragment_pelicula_vert.xml'
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_pelicula_vert,container,false);
         return v;
     }
 
+    // Se ejecuta cuando se ha creado la actividad relacionada con ese fragment (PeliculaActivity)
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        // Se inicializan los elementos necesarios del layoout
         titulo = getView().findViewById(R.id.textViewTextoTituloP);
         portada = getView().findViewById(R.id.imageViewPortadaP);
         adulto = getView().findViewById(R.id.textView18P);
@@ -88,30 +90,25 @@ public class PeliculaFragmentVert extends Fragment {
         favoritos.setImageResource(R.drawable.star);
         verMasTarde.setImageResource(R.drawable.watchlater);
 
-        /*
-        Bundle extras = getActivity().getIntent().getExtras();
-        if (extras != null) {
-            comApi = new ComunicacionApi(getActivity());
-            comApi.getMovieDetails(extras.getString("id"));
-            usuario = extras.getString("usuario");
-        }
-        */
-
         gestorDB = new GestorDB (getActivity(), "DB", null, 1);
 
-        ImageView imageViewFavoritos = getView().findViewById(R.id.imageViewFavoritos);
-        imageViewFavoritos.setOnClickListener(new View.OnClickListener() {
+        // Listener 'onClick' del ImageView para añadir la película a una lista de favoritos
+        favoritos.setOnClickListener(new View.OnClickListener() {
+            // Se ejecuta al pulsar el ImageView para añadir la película a una lista de favoritos
             @Override
             public void onClick(View v) {
+                // Se crea un diálogo DialogoAñadirFavoritos con las opciones de listas de favoritos para añadir la película actual
                 DialogFragment dialogoAñadirFavoritos = new DialogoAñadirFavoritos(usuario, id, titulo.getText().toString(), portadaURL);
                 dialogoAñadirFavoritos.show(getActivity().getSupportFragmentManager(), "añadir_favoritos");
             }
         });
 
-        ImageView imageViewVerMasTarde = getView().findViewById(R.id.imageViewVerMasTarde);
-        imageViewVerMasTarde.setOnClickListener(new View.OnClickListener() {
+        // Listener 'onClick' del ImageView para añadir la película a la lista 'ver más tarde'
+        verMasTarde.setOnClickListener(new View.OnClickListener() {
+            // Se ejecuta al pulsar el ImageView para añadir la película a la lista 'ver más tarde'
             @Override
             public void onClick(View v) {
+                // Se crea un diálogo DialogoFecha para seleccionar la fecha de cuándo se quiere programar la película
                 DialogFragment dialogo= new DialogoFecha();
                 dialogo.show(getActivity().getSupportFragmentManager(), "fecha");
             }
@@ -119,10 +116,10 @@ public class PeliculaFragmentVert extends Fragment {
     }
 
 
-
+    // Añade la información de la película seleccionada a los elementos del layout 'fragment_pelicula_vert.xml'
+    // Este método se llama desde PeliculaActivity
     public void setPelicula(String pUsuario, HashMap<String, String> pInfoPelicula) {
         usuario = pUsuario;
-
         id = pInfoPelicula.get("id");
         titulo.setText(pInfoPelicula.get("titulo"));
         portadaURL = pInfoPelicula.get("portadaURL");
@@ -142,17 +139,21 @@ public class PeliculaFragmentVert extends Fragment {
         productoras.setText(pInfoPelicula.get("productoras"));
         sinopsis.setText(pInfoPelicula.get("sinopsis"));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            sinopsis.setJustificationMode(LineBreaker.JUSTIFICATION_MODE_INTER_WORD);
+            sinopsis.setJustificationMode(LineBreaker.JUSTIFICATION_MODE_INTER_WORD);       // Se justifica el texto dentro del TextView 'sinopsis'
         }
     }
 
+    // Programa una alarma broadcast mediante AlarmManager que creará una notificación en la fecha recibida
+    // Este método se llama desde PeliculaActivity después de pulsar en 'Añadir a ver más tarde' y elegir una fecha
     public void notificacionVMT(int pYear, int pMonth, int pDayOfMonth) {
+        // Se crea un calendario con la fecha recibida
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, pYear);
         c.set(Calendar.MONTH, pMonth);
         c.set(Calendar.DAY_OF_MONTH, pDayOfMonth);
         String fechaVerMasTarde = pYear + "/" + pMonth + "/" + pDayOfMonth;
 
+        // Se programa una nueva alarma (AlarmManager) con la información de la película y la fecha recibida
         AlarmManager alarmManager = (AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(getActivity(), AlarmReceiver.class);
         intent.setAction("alarma");
@@ -162,16 +163,19 @@ public class PeliculaFragmentVert extends Fragment {
         intent.putExtra("anyo", pYear);
         intent.putExtra("mes", pMonth);
         intent.putExtra("dia", pDayOfMonth);
+
+        // PendingIntent que lanza un broadcast
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        // Se le indica al AlarmManager cuándo quiere lanzar el PendingIntent
+        //  - RTC_WAKEUP: lanza la alarma a la hora especificada despertando el dispositivo
+        //  - setExactAndAllowWhileIdle: la alarma funciona en modo descanso (Doze) y con exactitud
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 
-        gestorDB.insertarPeliculaVerMasTarde(usuario, id, fechaVerMasTarde, titulo.getText().toString(), portadaURL);
-        gestorDB.insertarAlarma(usuario, id, pYear, pMonth, pDayOfMonth, titulo.getText().toString(), fechaVerMasTarde);
+        gestorDB.insertarPeliculaVerMasTarde(usuario, id, fechaVerMasTarde, titulo.getText().toString(), portadaURL);           // Se inserta la información de la película para 'ver mas tarde' en la base de datos local
+        gestorDB.insertarAlarma(usuario, id, pYear, pMonth, pDayOfMonth, titulo.getText().toString(), fechaVerMasTarde);        // Se inserta la información de la alarma creada en la base de datos local --> Se utilizará al reiniciar el dispositivo para restablecer las alarmas pendientes
 
-        Toast aviso = Toast.makeText(getActivity(), getString(R.string.AñadidaVMT), Toast.LENGTH_LONG);
-        aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
-        aviso.show();
+        Toast.makeText(getActivity(), getString(R.string.AñadidaVMT), Toast.LENGTH_SHORT).show();
     }
 
 }

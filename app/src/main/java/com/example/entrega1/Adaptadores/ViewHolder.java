@@ -11,9 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.entrega1.R;
 
+// ViewHolder para el RecyclerView que muestra el catálogo de películas
 public class ViewHolder extends RecyclerView.ViewHolder {
 
-    public String id;
+    // Atributos públicos para acceder a ellos desde el adaptador (AdaptadorRecycler)
+    public String id;           // id de la película
+    // Elementos del CardView que representa una película en el catálogo
     public ImageView portada;
     public TextView titulo;
     public TextView generos;
@@ -21,13 +24,13 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     public TextView puntuacion;
     public TextView idioma;
     public TextView sinopsis;
-    public boolean[] seleccion;
-    private String usuario;
+    public boolean[] seleccion;     // Array de booleanos para indicar qué elementos se han elegido
 
-    public ViewHolder(String pUsuario, @NonNull View itemView){
+    // Contructor del ViewHolder
+    public ViewHolder(@NonNull View itemView){
         super(itemView);
 
-        usuario = pUsuario;
+        // Inicialización de los elementos definidos en el layout CardView (item_layout.xml)
         portada = itemView.findViewById(R.id.imageViewPortada);
         titulo = itemView.findViewById(R.id.textViewTitulo);
         generos = itemView.findViewById(R.id.textViewGeneros);
@@ -36,41 +39,8 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         idioma = itemView.findViewById(R.id.textViewIdiomaTexto);
         sinopsis = itemView.findViewById(R.id.textViewTextoSinopsis);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            sinopsis.setJustificationMode(LineBreaker.JUSTIFICATION_MODE_INTER_WORD);
+            sinopsis.setJustificationMode(LineBreaker.JUSTIFICATION_MODE_INTER_WORD);       // Se justifica el texto dentro del TextView 'sinopsis'
         }
-
-        /*
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Pelicula2 pelicula = new Pelicula2(usuario, id);
-                //elListener.seleccionarElemento(pelicula);
-                System.out.println(id);
-
-                int orientation = view.getResources().getConfiguration().orientation;
-                if (orientation == Configuration.ORIENTATION_LANDSCAPE){
-                    //EL OTRO FRAGMENT EXISTE
-                    //PeliculaFragment peliculaFragment = (PeliculaFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentPeliculaHoriz);
-                    //peliculaFragment.setPelicula(pelicula);
-                    System.out.println("HORIZONTAL");
-                }
-                else{
-                    //EL OTRO FRAGMENT NO EXISTE, HAY QUE LANZAR LA ACTIVIDAD QUE LO CONTIENE
-                    Intent i= new Intent(view.getContext(), PeliculaActivity2.class);
-                    i.putExtra("id", id);
-                    i.putExtra("usuario", usuario);
-                    view.getContext().startActivity(i);
-                }
-
-
-                Intent i = new Intent (view.getContext(), PeliculaActivity.class);
-                i.putExtra("id", id);
-                i.putExtra("usuario", usuario);
-                view.getContext().startActivity(i);
-
-            }
-        });
-        */
     }
 
 }

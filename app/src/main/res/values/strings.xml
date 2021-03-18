@@ -110,4 +110,5 @@
     <string name="ComentariosNot">Comentarios</string>
     <string name="ComentarioGuardadoNot">Has guardado un fichero con comentarios.</string>
     <string name="AbrirFichero">Abrir fichero</string>
+    <string name="Hola">Hola</string>
 </resources>

@@ -17,40 +17,51 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+// Clase encargada de realizar la comunicación con el API 'themoviedb'
 public class ComunicacionApi {
 
-    private Context contextoActividad;
+    private Context contextoActividad;      // Instancia del contexto de la actividad desde la que se crea una instancia 'ComunicacionApi'
+
+    // Interfaz del listener para que la información recibida del API se utilice en la actividad desde donde creado la instancia 'ComunicacionApi'
     private ListenerApi miListener;
-
-    public ComunicacionApi(Context pContext){
-        contextoActividad = pContext;
-        miListener = (ListenerApi)pContext;
-    }
-
     public interface ListenerApi {
         void alRecogerListaPeliculas(HashMap<String,String[]> pListaPeliculas);
         void alRecogerInfoPelicula(HashMap<String,String> pPelicula);
     }
 
+    // Contructor de la clase
+    public ComunicacionApi(Context pContext){
+        contextoActividad = pContext;
+        miListener = (ListenerApi)pContext;
+    }
+
+    // Método para realizar peticiones HTTP al API 'themoviedb' para obtener una lista de películas relacionadas con un título o género
     public void getMovieList(String pModo, String pFiltro) {
-        // Instantiate the RequestQueue.
+        // Se utiliza la librería Volley para realizar solicitudes HTTP desde una aplicación Android
+        // Se instancia un 'RequestQueue' para la petición
         RequestQueue queue = Volley.newRequestQueue(contextoActividad);
+
         String url = "";
         if("titulo".equals(pModo)){
+            // Si se buscar por título, se usa la siguiente URL
             url ="https://api.themoviedb.org/3/search/movie?api_key=4755eb5203850a5be306380eb262c096&query=" + pFiltro;
         }
         else if("genero".equals(pModo)){
+            // Si se buscar por género, se usa la siguiente URL
             url ="https://api.themoviedb.org/3/discover/movie?api_key=4755eb5203850a5be306380eb262c096&sort_by=popularity.desc&page=1&with_genres=" + pFiltro;
         }
 
-        // Request a JSON response from the provided URL.
+        // Se solicita una respuesta JSON a la URL especificada
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
+                    // Se ejecuta al recibir la respuesta HTTP en formato JSON
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
+                            // Se accede al objeto JSON donde se encuentra la información solicitada
                             JSONArray results = response.getJSONArray("results");
 
+                            // Se va a guardar la información necesaria extraida del objeto JSON por cada película recibida
                             HashMap<String,String[]> resultado = new HashMap<>();
                             String[] idsArray = new String[results.length()];
                             String[] portadasURLArray = new String[results.length()];
@@ -60,7 +71,6 @@ public class ComunicacionApi {
                             String[] puntuacionesArray = new String[results.length()];
                             String[] idiomasArray = new String[results.length()];
                             String[] sinopsisArray = new String[results.length()];
-
                             for(int i=0; i<results.length(); i++) {
                                 JSONObject movie = results.getJSONObject(i);
 
@@ -85,6 +95,8 @@ public class ComunicacionApi {
                                     int genreID = generosIDs.getInt(j);
                                     switch (genreID)
                                     {
+                                        // Los géneros se identifican en el API 'themoviedb' con un 'genreID'
+                                        // Se transforma el 'genreID' en el nombre del género correspondiente
                                         case 28:  generos += contextoActividad.getString(R.string.Accion) + " - ";
                                             break;
                                         case 12:  generos += contextoActividad.getString(R.string.Aventura) + " - ";
@@ -155,7 +167,7 @@ public class ComunicacionApi {
                             resultado.put("idiomas", idiomasArray);
                             resultado.put("sinopsis", sinopsisArray);
 
-                            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                            // Llama al método 'alRecogerListaPeliculas' del listener que se ejecutará en la actividad que a creado una instancia 'ComunicacionApi'
                             miListener.alRecogerListaPeliculas(resultado);
 
                         } catch (JSONException e) {
@@ -164,30 +176,35 @@ public class ComunicacionApi {
                     }
 
                 }, new Response.ErrorListener() {
+                    // Se ejecuta en caso de error al hacer la petición HTTP al API 'themoviedb'
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast aviso = Toast.makeText(contextoActividad, contextoActividad.getString(R.string.AlgoNoFunciono), Toast.LENGTH_LONG);
-                        aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
-                        aviso.show();
+                        Toast.makeText(contextoActividad, contextoActividad.getString(R.string.AlgoNoFunciono), Toast.LENGTH_LONG).show();
                     }
                 }
         );
 
-        // Add the request to the RequestQueue.
+        // Se añade la petición al 'RequestQueue'
         queue.add(jsonObjectRequest);
     }
 
+    // Método para realizar peticiones HTTP al API 'themoviedb' para obtener la información detallada de una película
     public void getMovieDetails(String pIdPelicula) {
-        // Instantiate the RequestQueue.
+        // Se utiliza la librería Volley para realizar solicitudes HTTP desde una aplicación Android
+        // Se instancia un 'RequestQueue' para la petición
         RequestQueue queue = Volley.newRequestQueue(contextoActividad);
+
+        // Se usa la siguiente URL con el id de la película
         String url ="https://api.themoviedb.org/3/movie/" + pIdPelicula + "?api_key=4755eb5203850a5be306380eb262c096";
 
-        // Request a JSON response from the provided URL.
+        // Se solicita una respuesta JSON a la URL especificada
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
+                    // Se ejecuta al recibir la respuesta HTTP en formato JSON
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
+                            // Se va a guardar la información necesaria extraida del objeto JSON para la película solicitada
                             HashMap<String,String> resultado = new HashMap<>();
 
                             resultado.put("id", pIdPelicula);
@@ -277,6 +294,7 @@ public class ComunicacionApi {
                             String sinopsis = response.getString("overview");
                             resultado.put("sinopsis", sinopsis);
 
+                            // Llama al método 'alRecogerInfoPelicula' del listener que se ejecutará en la actividad que a creado una instancia 'ComunicacionApi'
                             miListener.alRecogerInfoPelicula(resultado);
 
                         } catch (JSONException e) {
@@ -285,16 +303,14 @@ public class ComunicacionApi {
                     }
 
                 }, new Response.ErrorListener() {
+            // Se ejecuta en caso de error al hacer la petición HTTP al API 'themoviedb'
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast aviso = Toast.makeText(contextoActividad, contextoActividad.getString(R.string.AlgoNoFunciono), Toast.LENGTH_LONG);
-                aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
-                aviso.show();
+                Toast.makeText(contextoActividad, contextoActividad.getString(R.string.AlgoNoFunciono), Toast.LENGTH_LONG).show();
             }
-        }
-        );
+        });
 
-        // Add the request to the RequestQueue.
+        // Se añade la petición al 'RequestQueue'
         queue.add(jsonObjectRequest);
     }
 
