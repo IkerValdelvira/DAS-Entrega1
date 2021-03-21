@@ -12,7 +12,7 @@ import com.example.entrega1.Modelos.Alarma;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-// BroadcastReceiver que se utiliza para poner en marcha las alarmas pendientes después de reinicia el dispositivo
+// BroadcastReceiver que se utiliza para poner en marcha las alarmas pendientes después de reiniciar el dispositivo
 public class RestartAlarmsReceiver extends BroadcastReceiver {
 
     // Se ejecuta al recibir un aviso de mensaje de broadcast

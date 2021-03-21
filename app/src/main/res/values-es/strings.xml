@@ -62,7 +62,7 @@
     <string name="ListaCreada">Lista creada correctamente.</string>
     <string name="NoCreadoLista">No se ha creado una nueva lista.</string>
     <string name="EliminarPeliculaLista">Eliminar película de la lista</string>
-    <string name="SeguroQuitarLista">¿Estás seguro de que eliminar la película de la lista?</string>
+    <string name="SeguroQuitarLista">¿Estás seguro de que quieres eliminar la película de la lista?</string>
     <string name="PeliculaEliminadaLista">Película eliminada de la lista correctamente.</string>
     <string name="Si">Sí</string>
     <string name="No">No</string>

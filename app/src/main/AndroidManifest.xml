@@ -37,7 +37,7 @@
         <!-- Bradcast Receiver para la alarma de las notificaciones -->
         <receiver android:name=".Alarmas.AlarmReceiver" />
 
-        <!-- Broadcast Receiver para detectar cuando se ha arrancado el sistema-->
+        <!-- Broadcast Receiver para detectar cuando se ha arrancado el sistema -->
         <receiver android:name=".Alarmas.RestartAlarmsReceiver" android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
